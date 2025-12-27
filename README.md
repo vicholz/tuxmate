@@ -127,6 +127,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 - [ ] Companion CLI tool
 - [ ] Expand application catalog (200+)
 - [ ] Dotfiles integration
+- [ ] Winget support (Windows)
+- [ ] Homebrew support (macOS)
+- [ ] Custom domain (tuxmate.app / tuxmate.sh)
+- [ ] Dockerfile for containerized deployment
 
 <div align="right">
 
