@@ -13,6 +13,9 @@ RUN npm ci --only=production && \
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Disable Next.js telemetry during build
+ENV NEXT_TELEMETRY_DISABLED=1
+
 # Copy package files
 COPY package.json package-lock.json ./
 
@@ -31,6 +34,8 @@ WORKDIR /app
 
 # Set environment to production
 ENV NODE_ENV=production
+# Disable Next.js telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs && \

@@ -131,6 +131,23 @@ The Docker container exposes port 3000 by default. You can customize the port ma
 docker run -p 8080:3000 tuxmate:latest
 ```
 
+### Environment Variables
+
+The following environment variables are configured by default:
+
+- `NODE_ENV=production` - Run in production mode
+- `PORT=3000` - Application port
+- `NEXT_TELEMETRY_DISABLED=1` - Disable Next.js anonymous telemetry
+
+You can override these when running the container:
+
+```bash
+docker run -p 3000:3000 \
+  -e PORT=3000 \
+  -e NEXT_TELEMETRY_DISABLED=1 \
+  tuxmate:latest
+```
+
 </details>
 
 

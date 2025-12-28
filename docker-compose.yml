@@ -5,13 +5,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: tuxmate:latest
+    image: ghcr.io/retrozenith/tuxmate:latest
     container_name: tuxmate
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - NEXT_TELEMETRY_DISABLED=1
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
