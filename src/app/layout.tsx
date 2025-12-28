@@ -15,6 +15,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TuxMate - Linux App Installer Command Generator",
   description: "TuxMate helps you generate terminal commands to install your favorite apps on any Linux distribution. Select your distro, pick your apps, and get your install command.",
+  openGraph: {
+    title: "TuxMate - Linux App Installer",
+    description: "Generate install commands for 180+ apps on Ubuntu, Debian, Arch, Fedora, and more.",
+    type: "website",
+    url: "https://tuxmate.abusov.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TuxMate - Linux App Installer",
+    description: "Generate install commands for 180+ apps on any Linux distro.",
+  },
 };
 
 // Script to run before React hydrates to prevent theme flash
@@ -34,12 +45,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const umamiId = process.env.NEXT_PUBLIC_UMAMI_ID;
+  const cfBeacon = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <script defer src="https://cloud.umami.is/script.js" data-website-id="afcac946-8d72-4ab4-a817-d2834c909c9e"></script>
-        <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "32016566a89b46daabdfed256940a53c"}'></script>
+        {umamiId && (
+          <script defer src="https://cloud.umami.is/script.js" data-website-id={umamiId} />
+        )}
+        {cfBeacon && (
+          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${cfBeacon}"}`} />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

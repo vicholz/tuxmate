@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useTheme } from "@/hooks/use-theme"
+import { useTheme } from "@/hooks/useTheme"
 import { analytics } from "@/lib/analytics"
 
 interface ThemeToggleProps {

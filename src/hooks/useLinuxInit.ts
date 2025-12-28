@@ -2,19 +2,11 @@
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { distros, apps, type DistroId } from '@/lib/data';
+import { isAurPackage } from '@/lib/aur';
 
-// AUR package detection patterns
-export const AUR_PATTERNS = ['-bin', '-git', '-appimage'];
+// Re-export for backwards compatibility
+export { isAurPackage, AUR_PATTERNS, KNOWN_AUR_PACKAGES } from '@/lib/aur';
 
-// Known AUR packages that don't follow the suffix naming convention
-export const KNOWN_AUR_PACKAGES = new Set([
-    'google-chrome', 'sublime-text-4', 'spotify', 'stremio', 'dropbox',
-    'slack-desktop', 'zoom', 'proton-vpn-gtk-app', 'bitwarden', 'discord'
-]);
-
-export function isAurPackage(packageName: string): boolean {
-    return AUR_PATTERNS.some(pattern => packageName.endsWith(pattern)) || KNOWN_AUR_PACKAGES.has(packageName);
-}
 
 export interface UseLinuxInitReturn {
     selectedDistro: DistroId;
@@ -34,6 +26,8 @@ export interface UseLinuxInitReturn {
     hasAurPackages: boolean;
     aurPackageNames: string[];
     aurAppNames: string[];
+    // Hydration state
+    isHydrated: boolean;
 }
 
 const STORAGE_KEY_DISTRO = 'linuxinit_distro';
@@ -143,7 +137,12 @@ export function useLinuxInit(): UseLinuxInitReturn {
     }, []);
 
     const toggleApp = useCallback((appId: string) => {
-        if (!isAppAvailable(appId)) return;
+        // Check availability inline to avoid stale closure
+        const app = apps.find(a => a.id === appId);
+        if (!app) return;
+        const pkg = app.targets[selectedDistro];
+        if (pkg === undefined || pkg === null) return;
+
         setSelectedApps(prev => {
             const newSet = new Set(prev);
             if (newSet.has(appId)) {
@@ -153,7 +152,7 @@ export function useLinuxInit(): UseLinuxInitReturn {
             }
             return newSet;
         });
-    }, [isAppAvailable]);
+    }, [selectedDistro]);
 
     const selectAll = useCallback(() => {
         const allAvailable = apps
@@ -243,6 +242,8 @@ export function useLinuxInit(): UseLinuxInitReturn {
         hasAurPackages: aurPackageInfo.hasAur,
         aurPackageNames: aurPackageInfo.packages,
         aurAppNames: aurPackageInfo.appNames,
+        // Hydration state
+        isHydrated: hydrated,
     };
 }
 

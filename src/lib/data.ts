@@ -266,16 +266,4 @@ export const isAppAvailable = (app: AppData, distro: DistroId): boolean => {
     return distro in app.targets;
 };
 
-// Generate install command
-export const generateCommand = (selectedAppIds: Set<string>, distro: DistroId): string => {
-    const distroData = distros.find(d => d.id === distro);
-    if (!distroData) return '';
-
-    const packages = Array.from(selectedAppIds)
-        .map(id => apps.find(a => a.id === id))
-        .filter(app => app && app.targets[distro])
-        .map(app => app!.targets[distro]);
-
-    if (packages.length === 0) return 'Select apps to generate command';
-    return `${distroData.installPrefix} ${packages.join(' ')}`;
-};
+// Note: For command generation, use useLinuxInit().generatedCommand or generateInstallScript()
