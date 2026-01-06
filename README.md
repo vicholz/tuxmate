@@ -40,14 +40,11 @@ a new machine or can't remember all the package names for your favorite apps?
 ### **Smart Script Generation**  
 - Detects already-installed packages
 - Handles AUR packages automatically on Arch
-- Enables RPM Fusion when needed on Fedora
 - Parallel installation for Flatpak
 - Network retry with exponential backoff
 - Progress bars with ETA
 - Colored output and summary reports
 
-### **Availability Awareness**  
-Shows which apps are available for your selected distro, with instructions for unavailable packages.
 
 
 
@@ -89,7 +86,9 @@ src/
 ├── app/                    # Next.js app router
 │   ├── page.tsx            # Main page component
 │   ├── layout.tsx          # Root layout with meta tags
-│   └── globals.css         # Tailwind styles
+│   ├── globals.css         # Tailwind styles
+│   ├── error.tsx           # Error boundary
+│   └── favicon.ico         # Site favicon
 ├── components/
 │   ├── app/                # App cards & categories
 │   ├── command/            # Command footer & AUR settings
@@ -102,6 +101,7 @@ src/
 │   ├── useLinuxInit.ts     # Main app state management
 │   ├── useKeyboardNavigation.ts
 │   ├── useTheme.tsx
+│   ├── useTooltip.ts
 │   └── useDelayedTooltip.ts
 ├── lib/
 │   ├── data.ts             # Apps, distros, icons
@@ -186,7 +186,8 @@ docker run -p 3000:3000 \
 </details>
 
 
-## 🛠️ Tech Stack
+<details>
+<summary><h2>🛠️ Tech Stack</h2></summary>
 
 - [Next.js](https://nextjs.org/) 16 (App Router)
 - [React](https://react.dev/) 19
@@ -197,12 +198,7 @@ docker run -p 3000:3000 \
 - [Vitest](https://vitest.dev/) (testing)
 - [Lucide React](https://lucide.dev/) (icons)
 
-
-## 🚀 Usage
-1. Select your distribution from the dropdown
-2. Browse categories and select applications
-3. Copy the generated command or download the full install script
-4. Run the script on your Linux machine
+</details>
 
 ### ⌨️ Keyboard Shortcuts
 
@@ -243,7 +239,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 
 
-
 ### Planned
 
 - [ ] Winget support (Windows)
@@ -264,6 +259,24 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 - **[tuxmate-cli](https://github.com/Gururagavendra/tuxmate-cli)** – CLI companion for tuxmate, uses tuxmate's package database
 
 </details>
+
+
+<details>
+<summary><h4>💳 Monetary Contributions</h4></summary>
+
+No tips jar here. I’m happy just knowing you’re using Linux.
+
+If you want to earn some real life karma points, consider donating to the following organizations:
+
+* [KDE e.V.](https://kde.org/community/donations/)
+* [Gnome Foundation](https://www.gnome.org/donate/)
+* [Arch Linux](https://archlinux.org/donate/)
+* [The Tor Project](https://donate.torproject.org/)
+
+Comments, suggestions, bug reports and contributions are welcome.
+
+</details>
+
 
 <div align="right">
 
