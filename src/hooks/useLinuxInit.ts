@@ -242,6 +242,20 @@ export function useLinuxInit(): UseLinuxInitReturn {
             }
         }
 
+        // Handle Homebrew: separate formulae and casks into separate commands
+        if (selectedDistro === 'homebrew') {
+            const formulae = packageNames.filter(p => !p.startsWith('--cask '));
+            const casks = packageNames.filter(p => p.startsWith('--cask ')).map(p => p.replace('--cask ', ''));
+            const parts: string[] = [];
+            if (formulae.length > 0) {
+                parts.push(`brew install ${formulae.join(' ')}`);
+            }
+            if (casks.length > 0) {
+                parts.push(`brew install --cask ${casks.join(' ')}`);
+            }
+            return parts.join(' && ') || '# No packages selected';
+        }
+
         return `${distro.installPrefix} ${packageNames.join(' ')}`;
     }, [selectedDistro, selectedApps, aurPackageInfo.hasAur, hasYayInstalled, selectedHelper]);
 
