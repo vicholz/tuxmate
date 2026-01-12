@@ -25,7 +25,7 @@ Fresh install? New machine? Can't remember every package name? We've all been th
 - Arch Linux (pacman + AUR)
 - Fedora (dnf)
 - openSUSE (zypper)
-- Nix (nix-env)
+- Nix (declarative config)
 - Flatpak
 - Snap
 - Homebrew (macOS + Linux)
@@ -38,6 +38,7 @@ Fresh install? New machine? Can't remember every package name? We've all been th
 ### **Smart Script Generation**  
 - Detects already-installed packages
 - Handles AUR packages automatically on Arch
+- **Nix Unfree Detection**: Warns compliant configuration for unfree packages (Discord, Spotify, etc.)
 - Homebrew formula/cask separation for macOS
 - Parallel installation for Flatpak
 - Network retry with exponential backoff
@@ -237,6 +238,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 - [x] Package availability indicators (including AUR badges)
 - [x] Homebrew support (macOS + Linux)
 - [x] PWA support for offline use
+- [x] Nix configuration.nix download with unfree package detection
 
 
 
@@ -247,7 +249,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 - [ ] Custom presets / profiles
 - [ ] Share configurations via URL
 - [ ] More distros (FreeBSD, Gentoo, Void, Alpine)
-- [ ] Nix configuration.nix download
 - [ ] i18n / Multi-language support
 - [ ] Companion CLI tool
 - [ ] Expand application catalog (200+)

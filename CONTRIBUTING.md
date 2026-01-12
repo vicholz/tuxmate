@@ -257,6 +257,7 @@ TuxMate uses the [Iconify API](https://iconify.design/) for icons. Icon helpers 
 - [ ] Ubuntu/Debian packages are in **Main/Universe only** (no PPAs)
 - [ ] Flatpak uses **full App ID** from [Flathub](https://flathub.org/)
 - [ ] Snap packages checked for `--classic` requirement
+- [ ] Nix packages checked for unfree license (add to `KNOWN_UNFREE_PACKAGES` if needed)
 - [ ] Homebrew uses correct format: `'formula'` for CLI, `'--cask name'` for GUI apps
 
 ### Code Quality
@@ -436,11 +437,29 @@ src/lib/
     ├── ubuntu.ts               # Ubuntu apt + PPA handling
     ├── fedora.ts               # Fedora dnf + RPM Fusion
     ├── opensuse.ts             # openSUSE zypper
-    ├── nix.ts                  # Nix package manager
+    ├── nix.ts                  # Nix declarative config generator
     ├── flatpak.ts              # Flatpak (parallel install)
     ├── snap.ts                 # Snap packages
     └── homebrew.ts             # Homebrew (formulae + casks)
 ```
+
+### Nix Unfree Packages
+
+When adding Nix packages, check if they require `allowUnfree = true`. Unfree packages are detected in [`src/lib/nixUnfree.ts`](src/lib/nixUnfree.ts).
+
+**Known unfree packages** (add new ones to `KNOWN_UNFREE_PACKAGES`):
+- Communication: `discord`, `slack`, `zoom-us`, `teams`, `skypeforlinux`
+- Browsers: `google-chrome`, `vivaldi`, `opera`
+- Media: `spotify`
+- Gaming: `steam`
+- Dev: `vscode`, `sublime-text`, `postman`, `code-cursor`, `vagrant`, JetBrains IDEs
+- Creative: `davinci-resolve`
+- Other: `obsidian`, `dropbox`, `1password`
+
+**How it works:**
+1. User selects unfree packages with Nix distro
+2. UI shows amber warning listing affected apps
+3. Downloaded `configuration.nix` includes comment with `allowUnfree` instructions
 
 ### Script Generator Features
 
