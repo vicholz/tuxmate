@@ -193,6 +193,9 @@ export function HowItWorks() {
                                 <strong className="text-[var(--text-secondary)]">Auto-save</strong> — Your app selections are saved automatically in your browser. Come back anytime and your selections will still be there.
                             </li>
                             <li>
+                                <strong className="text-[var(--text-secondary)]">NixOS</strong> — Generates `environment.systemPackages`. If you pick unfree apps, the download includes comments showing exactly what to whitelist with `allowUnfree`.
+                            </li>
+                            <li>
                                 <strong className="text-[var(--text-secondary)]">Script Safety</strong> — Downloaded scripts are robust and idempotent. They include error handling, network retries, and system checks. Run them with <code className="px-1 py-0.5 bg-[var(--bg-secondary)] border-l-2 border-[var(--accent)] text-xs font-mono">bash tuxmate-*.sh</code> to safely install your selection.
                             </li>
                         </ul>
