@@ -43,6 +43,9 @@ interface AppItemProps {
     onTooltipLeave: () => void;
     onFocus?: () => void;
     color?: string;
+    // Flatpak/Snap verification status
+    isVerified?: boolean;
+    verificationSource?: 'flathub' | 'snap' | null;
 }
 
 export const AppItem = memo(function AppItem({
@@ -56,6 +59,8 @@ export const AppItem = memo(function AppItem({
     onTooltipLeave,
     onFocus,
     color = 'gray',
+    isVerified = false,
+    verificationSource = null,
 }: AppItemProps) {
     // Why isn't this app available? Tell the user.
     const getUnavailableText = () => {
@@ -135,13 +140,26 @@ export const AppItem = memo(function AppItem({
                     {app.name}
                 </span>
                 {isAur && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                        src="https://api.iconify.design/simple-icons/archlinux.svg?color=%231793d1"
+                    <svg
                         className="ml-1.5 w-3 h-3 flex-shrink-0 opacity-80"
-                        alt="AUR"
-                        title="This is an AUR package"
-                    />
+                        viewBox="0 0 24 24"
+                        fill="#1793d1"
+                        aria-label="AUR package"
+                    >
+                        <title>This is an AUR package</title>
+                        <path d="M12 0c-.39 0-.77.126-1.11.365a2.22 2.22 0 0 0-.82 1.056L0 24h4.15l2.067-5.58h11.666L19.95 24h4.05L13.91 1.42A2.24 2.24 0 0 0 12 0zm0 4.542l5.77 15.548H6.23l5.77-15.548z" />
+                    </svg>
+                )}
+                {isVerified && verificationSource && (
+                    <svg
+                        className="ml-1 w-3.5 h-3.5 flex-shrink-0 opacity-90"
+                        viewBox="0 0 24 24"
+                        fill={verificationSource === 'flathub' ? '#4A90D9' : '#82BEA0'}
+                        aria-label={verificationSource === 'flathub' ? 'Verified on Flathub' : 'Verified publisher on Snap Store'}
+                    >
+                        <title>{verificationSource === 'flathub' ? 'Verified on Flathub' : 'Verified publisher on Snap Store'}</title>
+                        <path d="M23 12l-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82 1.89 3.2 3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12m-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z" />
+                    </svg>
                 )}
             </div>
             {/* Exclamation mark icon for unavailable apps */}

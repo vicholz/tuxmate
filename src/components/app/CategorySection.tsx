@@ -28,6 +28,9 @@ interface CategorySectionProps {
     categoryIndex: number;
     onCategoryFocus?: () => void;
     onAppFocus?: (appId: string) => void;
+    // Flatpak/Snap verification status
+    isVerified?: (distro: DistroId, packageName: string) => boolean;
+    getVerificationSource?: (distro: DistroId, packageName: string) => 'flathub' | 'snap' | null;
 }
 
 /**
@@ -68,6 +71,8 @@ function CategorySectionComponent({
     categoryIndex,
     onCategoryFocus,
     onAppFocus,
+    isVerified,
+    getVerificationSource,
 }: CategorySectionProps) {
     const selectedInCategory = categoryApps.filter(a => selectedApps.has(a.id)).length;
     const isCategoryFocused = focusedType === 'category' && focusedId === category;
@@ -162,6 +167,15 @@ function CategorySectionComponent({
                         onTooltipLeave={onTooltipLeave}
                         onFocus={() => onAppFocus?.(app.id)}
                         color={color}
+                        isVerified={
+                            (selectedDistro === 'flatpak' || selectedDistro === 'snap') &&
+                            isVerified?.(selectedDistro, app.targets?.[selectedDistro] || '') || false
+                        }
+                        verificationSource={
+                            (selectedDistro === 'flatpak' || selectedDistro === 'snap')
+                                ? getVerificationSource?.(selectedDistro, app.targets?.[selectedDistro] || '') || null
+                                : null
+                        }
                     />
                 ))}
             </div>
@@ -169,10 +183,7 @@ function CategorySectionComponent({
     );
 }
 
-/**
- * Custom memo comparison because React's shallow compare was killing perf.
- * This is the kind of thing that makes you question your career choices.
- */
+// Custom memo comparison - React's shallow compare was killing perf
 export const CategorySection = memo(CategorySectionComponent, (prevProps, nextProps) => {
     // Always re-render if app count changes
     if (prevProps.categoryApps.length !== nextProps.categoryApps.length) return false;
@@ -189,6 +200,10 @@ export const CategorySection = memo(CategorySectionComponent, (prevProps, nextPr
     if (prevProps.focusedId !== nextProps.focusedId) return false;
     if (prevProps.focusedType !== nextProps.focusedType) return false;
     if (prevProps.categoryIndex !== nextProps.categoryIndex) return false;
+
+    // Re-render when verification functions change (Flathub data loads)
+    if (prevProps.isVerified !== nextProps.isVerified) return false;
+    if (prevProps.getVerificationSource !== nextProps.getVerificationSource) return false;
 
     // Check if selection state changed for any app in this category
     for (const app of nextProps.categoryApps) {
