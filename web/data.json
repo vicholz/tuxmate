@@ -1,0 +1,2870 @@
+{
+  "distros": [
+    {
+      "id": "ubuntu",
+      "name": "Ubuntu",
+      "icon": "ubuntu",
+      "color": "#E95420",
+      "installPrefix": "sudo apt install -y"
+    },
+    {
+      "id": "debian",
+      "name": "Debian",
+      "icon": "debian",
+      "color": "#A81D33",
+      "installPrefix": "sudo apt install -y"
+    },
+    {
+      "id": "arch",
+      "name": "Arch",
+      "icon": "archlinux",
+      "color": "#1793D1",
+      "installPrefix": "sudo pacman -S --needed --noconfirm"
+    },
+    {
+      "id": "fedora",
+      "name": "Fedora",
+      "icon": "fedora",
+      "color": "#51A2DA",
+      "installPrefix": "sudo dnf install -y"
+    },
+    {
+      "id": "opensuse",
+      "name": "OpenSUSE",
+      "icon": "opensuse",
+      "color": "#73BA25",
+      "installPrefix": "sudo zypper install -y"
+    },
+    {
+      "id": "nix",
+      "name": "Nix",
+      "icon": "nixos",
+      "color": "#5277C3",
+      "installPrefix": "nix-env -iA nixpkgs."
+    },
+    {
+      "id": "flatpak",
+      "name": "Flatpak",
+      "icon": "flatpak",
+      "color": "#4A90D9",
+      "installPrefix": "flatpak install flathub -y"
+    },
+    {
+      "id": "snap",
+      "name": "Snap",
+      "icon": "snapcraft",
+      "color": "#82BEA0",
+      "installPrefix": "sudo snap install"
+    },
+    {
+      "id": "homebrew",
+      "name": "Homebrew",
+      "icon": "homebrew",
+      "color": "#FBB040",
+      "installPrefix": "brew install"
+    }
+  ],
+  "categories": [
+    "Web Browsers",
+    "Communication",
+    "Media",
+    "Gaming",
+    "Office",
+    "Creative",
+    "System",
+    "File Sharing",
+    "Security",
+    "VPN & Network",
+    "Dev: Editors",
+    "Dev: Languages",
+    "Dev: Tools",
+    "Terminal",
+    "CLI Tools"
+  ],
+  "categoryColors": {
+    "Web Browsers": "#f97316",
+    "Communication": "#3b82f6",
+    "Media": "#eab308",
+    "Gaming": "#a855f7",
+    "Office": "#6366f1",
+    "Creative": "#06b6d4",
+    "System": "#ef4444",
+    "File Sharing": "#14b8a6",
+    "Security": "#22c55e",
+    "VPN & Network": "#10b981",
+    "Dev: Editors": "#0ea5e9",
+    "Dev: Languages": "#f43f5e",
+    "Dev: Tools": "#64748b",
+    "Terminal": "#71717a",
+    "CLI Tools": "#6b7280"
+  },
+  "aurPatterns": [
+    "-bin",
+    "-git",
+    "-appimage"
+  ],
+  "knownAurPackages": [
+    "brave-bin",
+    "librewolf-bin",
+    "google-chrome",
+    "zen-browser-bin",
+    "helium-browser-bin",
+    "discord",
+    "vesktop-bin",
+    "signal-desktop",
+    "slack-desktop",
+    "zoom",
+    "element-desktop",
+    "vscode",
+    "vscodium-bin",
+    "sublime-text-4",
+    "cursor-bin",
+    "zed",
+    "postman-bin",
+    "bruno-bin",
+    "hoppscotch-bin",
+    "yaak-bin",
+    "imhex-bin",
+    "dbeaver",
+    "spotify",
+    "stremio",
+    "onlyoffice-bin",
+    "obsidian",
+    "logseq-desktop-bin",
+    "joplin-appimage",
+    "zotero-bin",
+    "trilium-bin",
+    "proton-vpn-gtk-app",
+    "mullvad-vpn-bin",
+    "bitwarden",
+    "veracrypt",
+    "localsend-bin",
+    "dropbox",
+    "ab-download-manager-bin",
+    "freedownloadmanager-bin",
+    "heroic-games-launcher-bin",
+    "prismlauncher",
+    "protonup-qt-bin",
+    "mission-center",
+    "resources",
+    "ghostty",
+    "wezterm"
+  ],
+  "apps": [
+    {
+      "id": "firefox",
+      "name": "Firefox",
+      "description": "Privacy-focused open-source browser by Mozilla",
+      "category": "Web Browsers",
+      "icon": "firefox",
+      "targets": {
+        "ubuntu": "firefox",
+        "debian": "firefox-esr",
+        "arch": "firefox",
+        "fedora": "firefox",
+        "opensuse": "MozillaFirefox",
+        "nix": "firefox",
+        "flatpak": "org.mozilla.firefox",
+        "snap": "firefox",
+        "homebrew": "--cask firefox"
+      }
+    },
+    {
+      "id": "chromium",
+      "name": "Chromium",
+      "description": "Open-source browser that powers Google Chrome",
+      "category": "Web Browsers",
+      "icon": "chromium",
+      "targets": {
+        "ubuntu": "chromium-browser",
+        "debian": "chromium",
+        "arch": "chromium",
+        "fedora": "chromium",
+        "opensuse": "chromium",
+        "nix": "chromium",
+        "flatpak": "org.chromium.Chromium",
+        "snap": "chromium",
+        "homebrew": "--cask chromium"
+      }
+    },
+    {
+      "id": "brave",
+      "name": "Brave",
+      "description": "Privacy browser with built-in ad/tracker blocker",
+      "category": "Web Browsers",
+      "icon": "brave",
+      "targets": {
+        "arch": "brave-bin",
+        "opensuse": "brave-browser",
+        "nix": "brave",
+        "flatpak": "com.brave.Browser",
+        "snap": "brave",
+        "homebrew": "--cask brave-browser"
+      }
+    },
+    {
+      "id": "librewolf",
+      "name": "LibreWolf",
+      "description": "Privacy-hardened Firefox fork with telemetry removed",
+      "category": "Web Browsers",
+      "icon": "firefoxbrowser",
+      "targets": {
+        "arch": "librewolf-bin",
+        "opensuse": "librewolf",
+        "nix": "librewolf",
+        "flatpak": "io.gitlab.librewolf-community",
+        "homebrew": "--cask librewolf"
+      }
+    },
+    {
+      "id": "tor",
+      "name": "Tor Browser",
+      "description": "Anonymous browsing via the Tor network",
+      "category": "Web Browsers",
+      "icon": "torbrowser",
+      "targets": {
+        "ubuntu": "torbrowser-launcher",
+        "arch": "torbrowser-launcher",
+        "fedora": "torbrowser-launcher",
+        "opensuse": "torbrowser-launcher",
+        "nix": "tor-browser",
+        "flatpak": "org.torproject.torbrowser-launcher",
+        "homebrew": "--cask tor-browser"
+      }
+    },
+    {
+      "id": "chrome",
+      "name": "Google Chrome",
+      "description": "Most popular web browser by Google",
+      "category": "Web Browsers",
+      "icon": "chrome",
+      "targets": {
+        "arch": "google-chrome",
+        "opensuse": "google-chrome-stable",
+        "nix": "google-chrome",
+        "flatpak": "com.google.Chrome",
+        "homebrew": "--cask google-chrome"
+      }
+    },
+    {
+      "id": "zen",
+      "name": "Zen Browser",
+      "description": "Privacy-focused Firefox fork",
+      "category": "Web Browsers",
+      "icon": "zenbrowser",
+      "targets": {
+        "arch": "zen-browser-bin",
+        "flatpak": "app.zen_browser.zen",
+        "homebrew": "--cask zen"
+      }
+    },
+    {
+      "id": "helium",
+      "name": "Helium",
+      "description": "Privacy-focused ungoogled-chromium browser",
+      "category": "Web Browsers",
+      "icon": "googlechrome",
+      "targets": {
+        "arch": "helium-browser-bin",
+        "homebrew": "--cask helium"
+      }
+    },
+    {
+      "id": "vivaldi",
+      "name": "Vivaldi",
+      "description": "Highly customizable browser for power users",
+      "category": "Web Browsers",
+      "icon": "vivaldi",
+      "targets": {
+        "arch": "vivaldi",
+        "nix": "vivaldi",
+        "flatpak": "com.vivaldi.Vivaldi",
+        "snap": "vivaldi",
+        "homebrew": "--cask vivaldi"
+      }
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "description": "Popular voice, video, and text chat platform",
+      "category": "Communication",
+      "icon": "discord",
+      "targets": {
+        "arch": "discord",
+        "opensuse": "discord",
+        "nix": "discord",
+        "flatpak": "com.discordapp.Discord",
+        "snap": "discord",
+        "homebrew": "--cask discord"
+      }
+    },
+    {
+      "id": "vesktop",
+      "name": "Vesktop",
+      "description": "Discord client with Vencord mods built-in",
+      "category": "Communication",
+      "icon": "vesktop",
+      "targets": {
+        "arch": "vesktop-bin",
+        "nix": "vesktop",
+        "flatpak": "dev.vencord.Vesktop",
+        "homebrew": "--cask vesktop"
+      }
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram",
+      "description": "Fast cloud-based messaging with file sharing",
+      "category": "Communication",
+      "icon": "telegram",
+      "targets": {
+        "arch": "telegram-desktop",
+        "opensuse": "telegram-desktop",
+        "nix": "telegram-desktop",
+        "flatpak": "org.telegram.desktop",
+        "snap": "telegram-desktop",
+        "homebrew": "--cask telegram"
+      }
+    },
+    {
+      "id": "signal",
+      "name": "Signal",
+      "description": "Secure end-to-end encrypted messaging app",
+      "category": "Communication",
+      "icon": "signal",
+      "targets": {
+        "arch": "signal-desktop",
+        "opensuse": "signal-desktop",
+        "nix": "signal-desktop",
+        "flatpak": "org.signal.Signal",
+        "snap": "signal-desktop",
+        "homebrew": "--cask signal"
+      }
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "description": "Team collaboration and business messaging",
+      "category": "Communication",
+      "icon": "slack",
+      "targets": {
+        "arch": "slack-desktop",
+        "nix": "slack",
+        "flatpak": "com.slack.Slack",
+        "snap": "slack",
+        "homebrew": "--cask slack"
+      }
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom",
+      "description": "Popular video conferencing and meetings",
+      "category": "Communication",
+      "icon": "zoom",
+      "targets": {
+        "arch": "zoom",
+        "nix": "zoom-us",
+        "flatpak": "us.zoom.Zoom",
+        "snap": "zoom-client",
+        "homebrew": "--cask zoom"
+      }
+    },
+    {
+      "id": "thunderbird",
+      "name": "Thunderbird",
+      "description": "Free email client by Mozilla with calendar",
+      "category": "Communication",
+      "icon": "thunderbird",
+      "targets": {
+        "ubuntu": "thunderbird",
+        "debian": "thunderbird",
+        "arch": "thunderbird",
+        "fedora": "thunderbird",
+        "opensuse": "MozillaThunderbird",
+        "nix": "thunderbird",
+        "flatpak": "org.mozilla.Thunderbird",
+        "snap": "thunderbird",
+        "homebrew": "--cask thunderbird"
+      }
+    },
+    {
+      "id": "element",
+      "name": "Element",
+      "description": "Decentralized Matrix chat client with E2E encryption",
+      "category": "Communication",
+      "icon": "element",
+      "targets": {
+        "arch": "element-desktop",
+        "opensuse": "element-desktop",
+        "nix": "element-desktop",
+        "flatpak": "im.riot.Riot",
+        "snap": "element-desktop",
+        "homebrew": "--cask element"
+      }
+    },
+    {
+      "id": "python3",
+      "name": "Python 3",
+      "description": "Popular beginner-friendly programming language",
+      "category": "Dev: Languages",
+      "icon": "python",
+      "targets": {
+        "ubuntu": "python3",
+        "debian": "python3",
+        "arch": "python",
+        "fedora": "python3",
+        "opensuse": "python3",
+        "nix": "python3",
+        "homebrew": "python@3.12"
+      }
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js",
+      "description": "Server-side JavaScript runtime environment",
+      "category": "Dev: Languages",
+      "icon": "nodedotjs",
+      "targets": {
+        "ubuntu": "nodejs",
+        "debian": "nodejs",
+        "arch": "nodejs",
+        "fedora": "nodejs",
+        "opensuse": "nodejs",
+        "nix": "nodejs",
+        "snap": "node --classic",
+        "homebrew": "node"
+      }
+    },
+    {
+      "id": "go",
+      "name": "Go",
+      "description": "Fast compiled programming language by Google",
+      "category": "Dev: Languages",
+      "icon": "go",
+      "targets": {
+        "ubuntu": "golang",
+        "debian": "golang",
+        "arch": "go",
+        "fedora": "golang",
+        "opensuse": "go",
+        "nix": "go",
+        "snap": "go --classic",
+        "homebrew": "go"
+      }
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "description": "Memory-safe systems programming language",
+      "category": "Dev: Languages",
+      "icon": "rust",
+      "targets": {
+        "arch": "rustup",
+        "fedora": "rustup",
+        "opensuse": "rustup",
+        "nix": "rustup",
+        "snap": "rustup --classic",
+        "homebrew": "rust"
+      }
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby",
+      "description": "Dynamic language known for elegant syntax",
+      "category": "Dev: Languages",
+      "icon": "ruby",
+      "targets": {
+        "ubuntu": "ruby",
+        "debian": "ruby",
+        "arch": "ruby",
+        "fedora": "ruby",
+        "opensuse": "ruby",
+        "nix": "ruby",
+        "snap": "ruby --classic",
+        "homebrew": "ruby"
+      }
+    },
+    {
+      "id": "php",
+      "name": "PHP",
+      "description": "Popular web server-side scripting language",
+      "category": "Dev: Languages",
+      "icon": "php",
+      "targets": {
+        "ubuntu": "php",
+        "debian": "php",
+        "arch": "php",
+        "fedora": "php",
+        "opensuse": "php8",
+        "nix": "php",
+        "homebrew": "php"
+      }
+    },
+    {
+      "id": "openjdk",
+      "name": "OpenJDK",
+      "description": "Open-source Java Development Kit",
+      "category": "Dev: Languages",
+      "icon": "openjdk",
+      "targets": {
+        "ubuntu": "openjdk-21-jdk",
+        "debian": "openjdk-17-jdk",
+        "arch": "jdk-openjdk",
+        "fedora": "java-21-openjdk",
+        "opensuse": "java-21-openjdk",
+        "nix": "openjdk",
+        "homebrew": "openjdk"
+      }
+    },
+    {
+      "id": "deno",
+      "name": "Deno",
+      "description": "Secure TypeScript/JavaScript runtime by Node creator",
+      "category": "Dev: Languages",
+      "icon": "deno",
+      "targets": {
+        "arch": "deno",
+        "opensuse": "deno",
+        "nix": "deno",
+        "homebrew": "deno"
+      }
+    },
+    {
+      "id": "bun",
+      "name": "Bun",
+      "description": "Ultra-fast JavaScript runtime and bundler",
+      "category": "Dev: Languages",
+      "icon": "bun",
+      "targets": {
+        "arch": "bun",
+        "nix": "bun",
+        "homebrew": "bun"
+      }
+    },
+    {
+      "id": "npm",
+      "name": "npm",
+      "description": "JavaScript package manager",
+      "category": "Dev: Languages",
+      "icon": "npm",
+      "targets": {
+        "ubuntu": "npm",
+        "debian": "npm",
+        "arch": "npm",
+        "fedora": "nodejs-npm",
+        "opensuse": "npm24",
+        "nix": "nodejs",
+        "snap": "node --classic",
+        "homebrew": "node"
+      }
+    },
+    {
+      "id": "pnpm",
+      "name": "pnpm",
+      "description": "Fast, disk space efficient package manager",
+      "category": "Dev: Languages",
+      "icon": "pnpm",
+      "targets": {
+        "arch": "pnpm",
+        "fedora": "pnpm",
+        "opensuse": "pnpm",
+        "nix": "pnpm",
+        "homebrew": "pnpm"
+      }
+    },
+    {
+      "id": "yarn",
+      "name": "yarn",
+      "description": "JavaScript package manager",
+      "category": "Dev: Languages",
+      "icon": "yarn",
+      "targets": {
+        "ubuntu": "yarnpkg",
+        "debian": "yarnpkg",
+        "arch": "yarn",
+        "fedora": "yarnpkg",
+        "opensuse": "yarn",
+        "nix": "yarn",
+        "homebrew": "yarn"
+      }
+    },
+    {
+      "id": "uv",
+      "name": "uv",
+      "description": "Fast Python package manager",
+      "category": "Dev: Languages",
+      "icon": "astral",
+      "targets": {
+        "arch": "uv",
+        "nix": "uv",
+        "homebrew": "uv"
+      }
+    },
+    {
+      "id": "vscode",
+      "name": "VS Code",
+      "description": "Most popular extensible code editor by Microsoft",
+      "category": "Dev: Editors",
+      "icon": "vscode",
+      "targets": {
+        "arch": "code",
+        "nix": "vscode",
+        "flatpak": "com.visualstudio.code",
+        "snap": "code --classic",
+        "homebrew": "--cask visual-studio-code"
+      }
+    },
+    {
+      "id": "vscodium",
+      "name": "VSCodium",
+      "description": "Community-built VS Code without Microsoft telemetry",
+      "category": "Dev: Editors",
+      "icon": "vscodium",
+      "targets": {
+        "arch": "vscodium-bin",
+        "nix": "vscodium",
+        "flatpak": "com.vscodium.codium",
+        "snap": "codium --classic",
+        "homebrew": "--cask vscodium"
+      }
+    },
+    {
+      "id": "vim",
+      "name": "Vim",
+      "description": "The classic modal text editor that started it all",
+      "category": "Dev: Editors",
+      "icon": "vim",
+      "targets": {
+        "ubuntu": "vim",
+        "debian": "vim",
+        "arch": "vim",
+        "fedora": "vim-enhanced",
+        "opensuse": "vim",
+        "nix": "vim",
+        "flatpak": "org.vim.Vim",
+        "snap": "vim-editor",
+        "homebrew": "vim"
+      }
+    },
+    {
+      "id": "neovim",
+      "name": "Neovim",
+      "description": "Modernized Vim with better extensibility",
+      "category": "Dev: Editors",
+      "icon": "neovim",
+      "targets": {
+        "ubuntu": "neovim",
+        "debian": "neovim",
+        "arch": "neovim",
+        "fedora": "neovim",
+        "opensuse": "neovim",
+        "nix": "neovim",
+        "flatpak": "com.neovim.Neovim",
+        "snap": "nvim --classic",
+        "homebrew": "neovim"
+      }
+    },
+    {
+      "id": "helix",
+      "name": "Helix",
+      "description": "Modal editor with LSP and tree-sitter built-in",
+      "category": "Dev: Editors",
+      "icon": "helix",
+      "targets": {
+        "arch": "helix",
+        "fedora": "helix",
+        "opensuse": "helix",
+        "nix": "helix",
+        "flatpak": "com.helix-editor.Helix",
+        "snap": "helix --classic",
+        "homebrew": "helix"
+      }
+    },
+    {
+      "id": "micro",
+      "name": "Micro",
+      "description": "Easy-to-use terminal text editor like nano",
+      "category": "Dev: Editors",
+      "icon": "microeditor",
+      "targets": {
+        "arch": "micro",
+        "ubuntu": "micro",
+        "debian": "micro",
+        "fedora": "micro",
+        "opensuse": "micro-editor",
+        "nix": "micro-editor",
+        "flatpak": "io.github.zyedidia.micro",
+        "snap": "micro --classic",
+        "homebrew": "micro"
+      }
+    },
+    {
+      "id": "zed",
+      "name": "Zed",
+      "description": "High-performance editor with real-time collaboration",
+      "category": "Dev: Editors",
+      "icon": "zedindustries",
+      "targets": {
+        "arch": "zed",
+        "nix": "zed-editor",
+        "flatpak": "dev.zed.Zed",
+        "homebrew": "--cask zed"
+      }
+    },
+    {
+      "id": "sublime",
+      "name": "Sublime Text",
+      "description": "Lightning-fast proprietary text editor",
+      "category": "Dev: Editors",
+      "icon": "sublimetext",
+      "targets": {
+        "arch": "sublime-text-4",
+        "nix": "sublime",
+        "flatpak": "com.sublimetext.three",
+        "snap": "sublime-text --classic",
+        "homebrew": "--cask sublime-text"
+      }
+    },
+    {
+      "id": "arduino",
+      "name": "Arduino IDE",
+      "description": "IDE for Arduino microcontroller development",
+      "category": "Dev: Editors",
+      "icon": "arduino",
+      "targets": {
+        "ubuntu": "arduino",
+        "debian": "arduino",
+        "arch": "arduino",
+        "fedora": "arduino",
+        "nix": "arduino-ide",
+        "flatpak": "cc.arduino.IDE2",
+        "snap": "arduino",
+        "homebrew": "--cask arduino-ide"
+      }
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "description": "AI-powered code editor based on VS Code",
+      "category": "Dev: Editors",
+      "icon": "cursor",
+      "targets": {
+        "arch": "cursor-bin",
+        "nix": "code-cursor",
+        "homebrew": "--cask cursor"
+      }
+    },
+    {
+      "id": "kate",
+      "name": "Kate",
+      "description": "Feature-rich text editor by KDE with syntax highlighting",
+      "category": "Dev: Editors",
+      "icon": "kde",
+      "targets": {
+        "ubuntu": "kate",
+        "debian": "kate",
+        "arch": "kate",
+        "fedora": "kate",
+        "opensuse": "kate",
+        "nix": "kdePackages.kate",
+        "flatpak": "org.kde.kate",
+        "snap": "kate --classic",
+        "homebrew": "--cask kate"
+      }
+    },
+    {
+      "id": "emacs",
+      "name": "Emacs",
+      "description": "Extensible, customizable, free/libre text editor",
+      "category": "Dev: Editors",
+      "icon": "gnuemacs",
+      "targets": {
+        "ubuntu": "emacs",
+        "debian": "emacs",
+        "arch": "emacs",
+        "fedora": "emacs",
+        "opensuse": "emacs",
+        "nix": "emacs",
+        "flatpak": "org.gnu.emacs",
+        "snap": "emacs --classic",
+        "homebrew": "--cask emacs-app"
+      }
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "description": "Industry-standard distributed version control",
+      "category": "Dev: Tools",
+      "icon": "git",
+      "targets": {
+        "ubuntu": "git",
+        "debian": "git",
+        "arch": "git",
+        "fedora": "git",
+        "opensuse": "git",
+        "nix": "git",
+        "homebrew": "git"
+      }
+    },
+    {
+      "id": "gitlfs",
+      "name": "Git LFS",
+      "description": "Git extension for versioning large files",
+      "category": "Dev: Tools",
+      "icon": "git",
+      "targets": {
+        "ubuntu": "git-lfs",
+        "debian": "git-lfs",
+        "arch": "git-lfs",
+        "fedora": "git-lfs",
+        "opensuse": "git-lfs",
+        "nix": "git-lfs",
+        "homebrew": "git-lfs"
+      }
+    },
+    {
+      "id": "lazygit",
+      "name": "LazyGit",
+      "description": "Simple terminal UI for git commands",
+      "category": "Dev: Tools",
+      "icon": "git",
+      "targets": {
+        "ubuntu": "lazygit",
+        "debian": "lazygit",
+        "arch": "lazygit",
+        "fedora": "lazygit",
+        "opensuse": "lazygit",
+        "nix": "lazygit",
+        "homebrew": "lazygit"
+      }
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "description": "Most popular container platform for app deployment",
+      "category": "Dev: Tools",
+      "icon": "docker",
+      "targets": {
+        "ubuntu": "docker.io",
+        "debian": "docker.io",
+        "arch": "docker",
+        "fedora": "docker",
+        "opensuse": "docker",
+        "nix": "docker",
+        "snap": "docker",
+        "homebrew": "docker"
+      }
+    },
+    {
+      "id": "podman",
+      "name": "Podman",
+      "description": "Rootless container engine, Docker alternative",
+      "category": "Dev: Tools",
+      "icon": "podman",
+      "targets": {
+        "ubuntu": "podman",
+        "debian": "podman",
+        "arch": "podman",
+        "fedora": "podman",
+        "opensuse": "podman",
+        "nix": "podman",
+        "homebrew": "podman"
+      }
+    },
+    {
+      "id": "kubectl",
+      "name": "kubectl",
+      "description": "Command-line tool for Kubernetes clusters",
+      "category": "Dev: Tools",
+      "icon": "kubernetes",
+      "targets": {
+        "arch": "kubectl",
+        "fedora": "kubernetes-client",
+        "opensuse": "kubectl",
+        "nix": "kubectl",
+        "snap": "kubectl --classic",
+        "homebrew": "kubectl"
+      }
+    },
+    {
+      "id": "vagrant",
+      "name": "Vagrant",
+      "description": "Build and manage portable dev environments",
+      "category": "Dev: Tools",
+      "icon": "vagrant",
+      "targets": {
+        "debian": "vagrant",
+        "arch": "vagrant",
+        "fedora": "vagrant",
+        "opensuse": "vagrant",
+        "nix": "vagrant",
+        "homebrew": "--cask vagrant"
+      }
+    },
+    {
+      "id": "virtualbox",
+      "name": "VirtualBox",
+      "description": "Free cross-platform virtual machine manager",
+      "category": "Dev: Tools",
+      "icon": "virtualbox",
+      "targets": {
+        "ubuntu": "virtualbox",
+        "arch": "virtualbox",
+        "opensuse": "virtualbox",
+        "nix": "virtualbox",
+        "homebrew": "--cask virtualbox"
+      }
+    },
+    {
+      "id": "gnomeboxes",
+      "name": "GNOME Boxes",
+      "description": "Simple virtual machine app for GNOME",
+      "category": "Dev: Tools",
+      "icon": "gnome",
+      "targets": {
+        "ubuntu": "gnome-boxes",
+        "debian": "gnome-boxes",
+        "arch": "gnome-boxes",
+        "fedora": "gnome-boxes",
+        "opensuse": "gnome-boxes",
+        "nix": "gnome-boxes",
+        "flatpak": "org.gnome.Boxes"
+      }
+    },
+    {
+      "id": "dbeaver",
+      "name": "DBeaver",
+      "description": "Universal database management tool",
+      "category": "Dev: Tools",
+      "icon": "dbeaver",
+      "targets": {
+        "arch": "dbeaver",
+        "nix": "dbeaver-bin",
+        "flatpak": "io.dbeaver.DBeaverCommunity",
+        "homebrew": "--cask dbeaver-community"
+      }
+    },
+    {
+      "id": "meld",
+      "name": "Meld",
+      "description": "Visual diff and merge tool for files",
+      "category": "Dev: Tools",
+      "icon": "meld",
+      "targets": {
+        "ubuntu": "meld",
+        "debian": "meld",
+        "arch": "meld",
+        "fedora": "meld",
+        "opensuse": "meld",
+        "nix": "meld",
+        "flatpak": "org.gnome.meld",
+        "homebrew": "--cask meld"
+      }
+    },
+    {
+      "id": "wireshark",
+      "name": "Wireshark",
+      "description": "Network protocol analyzer and packet capture",
+      "category": "Dev: Tools",
+      "icon": "wireshark",
+      "targets": {
+        "ubuntu": "wireshark",
+        "debian": "wireshark",
+        "arch": "wireshark-qt",
+        "fedora": "wireshark",
+        "opensuse": "wireshark",
+        "nix": "wireshark",
+        "flatpak": "org.wireshark.Wireshark",
+        "homebrew": "--cask wireshark-app"
+      }
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "description": "Popular API testing and development platform",
+      "category": "Dev: Tools",
+      "icon": "postman",
+      "targets": {
+        "arch": "postman-bin",
+        "nix": "postman",
+        "flatpak": "com.getpostman.Postman",
+        "snap": "postman",
+        "homebrew": "--cask postman"
+      }
+    },
+    {
+      "id": "bruno",
+      "name": "Bruno",
+      "description": "Offline-first open-source API client",
+      "category": "Dev: Tools",
+      "icon": "api",
+      "targets": {
+        "arch": "bruno-bin",
+        "nix": "bruno",
+        "flatpak": "com.usebruno.Bruno",
+        "snap": "bruno",
+        "homebrew": "--cask bruno"
+      }
+    },
+    {
+      "id": "hoppscotch",
+      "name": "Hoppscotch",
+      "description": "Open-source API development ecosystem",
+      "category": "Dev: Tools",
+      "icon": "hoppscotch",
+      "targets": {
+        "arch": "hoppscotch-bin",
+        "nix": "hoppscotch",
+        "homebrew": "--cask hoppscotch"
+      }
+    },
+    {
+      "id": "yaak",
+      "name": "Yaak",
+      "description": "Modern desktop API client for REST and GraphQL",
+      "category": "Dev: Tools",
+      "icon": "api",
+      "targets": {
+        "arch": "yaak-bin",
+        "nix": "yaak",
+        "homebrew": "--cask yaak"
+      }
+    },
+    {
+      "id": "virtmanager",
+      "name": "Virt Manager",
+      "description": "Desktop app for managing KVM virtual machines",
+      "category": "Dev: Tools",
+      "icon": "qemu",
+      "targets": {
+        "ubuntu": "virt-manager",
+        "debian": "virt-manager",
+        "arch": "virt-manager",
+        "fedora": "virt-manager",
+        "opensuse": "virt-manager",
+        "nix": "virt-manager",
+        "homebrew": "virt-manager"
+      }
+    },
+    {
+      "id": "imhex",
+      "name": "ImHex",
+      "description": "Feature-rich hex editor for reverse engineering",
+      "category": "Dev: Tools",
+      "icon": "hexadecimal",
+      "targets": {
+        "arch": "imhex-bin",
+        "fedora": "imhex",
+        "nix": "imhex",
+        "flatpak": "net.werwolv.ImHex",
+        "homebrew": "--cask imhex"
+      }
+    },
+    {
+      "id": "cmake",
+      "name": "CMake",
+      "description": "Cross-platform build system generator",
+      "category": "Dev: Tools",
+      "icon": "cmake",
+      "targets": {
+        "ubuntu": "cmake",
+        "debian": "cmake",
+        "arch": "cmake",
+        "fedora": "cmake",
+        "opensuse": "cmake",
+        "nix": "cmake",
+        "snap": "cmake --classic",
+        "homebrew": "cmake"
+      }
+    },
+    {
+      "id": "zsh",
+      "name": "Zsh",
+      "description": "Powerful shell with advanced completion features",
+      "category": "Terminal",
+      "icon": "zsh",
+      "targets": {
+        "ubuntu": "zsh",
+        "debian": "zsh",
+        "arch": "zsh",
+        "fedora": "zsh",
+        "opensuse": "zsh",
+        "nix": "zsh",
+        "homebrew": "zsh"
+      }
+    },
+    {
+      "id": "ohmyzsh",
+      "name": "Oh My Zsh",
+      "description": "Zsh configuration framework with plugins/themes",
+      "category": "Terminal",
+      "icon": "zsh",
+      "targets": {
+        "nix": "oh-my-zsh"
+      }
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "description": "Smart and user-friendly interactive shell",
+      "category": "Terminal",
+      "icon": "shell",
+      "targets": {
+        "ubuntu": "fish",
+        "debian": "fish",
+        "arch": "fish",
+        "fedora": "fish",
+        "opensuse": "fish",
+        "nix": "fish",
+        "homebrew": "fish"
+      }
+    },
+    {
+      "id": "starship",
+      "name": "Starship",
+      "description": "Cross-shell customizable command prompt",
+      "category": "Terminal",
+      "icon": "starship",
+      "targets": {
+        "ubuntu": "starship",
+        "debian": "starship",
+        "arch": "starship",
+        "opensuse": "starship",
+        "nix": "starship",
+        "homebrew": "starship"
+      }
+    },
+    {
+      "id": "alacritty",
+      "name": "Alacritty",
+      "description": "Blazing fast GPU-accelerated terminal emulator",
+      "category": "Terminal",
+      "icon": "alacritty",
+      "targets": {
+        "ubuntu": "alacritty",
+        "debian": "alacritty",
+        "arch": "alacritty",
+        "fedora": "alacritty",
+        "opensuse": "alacritty",
+        "nix": "alacritty",
+        "snap": "alacritty --classic",
+        "homebrew": "--cask alacritty"
+      }
+    },
+    {
+      "id": "kitty",
+      "name": "Kitty",
+      "description": "Fast GPU-based terminal with advanced features",
+      "category": "Terminal",
+      "icon": "cat",
+      "targets": {
+        "ubuntu": "kitty",
+        "debian": "kitty",
+        "arch": "kitty",
+        "fedora": "kitty",
+        "opensuse": "kitty",
+        "nix": "kitty",
+        "homebrew": "--cask kitty"
+      }
+    },
+    {
+      "id": "wezterm",
+      "name": "WezTerm",
+      "description": "GPU-accelerated terminal with Lua configuration",
+      "category": "Terminal",
+      "icon": "wezterm",
+      "targets": {
+        "arch": "wezterm",
+        "opensuse": "wezterm",
+        "nix": "wezterm",
+        "flatpak": "org.wezfurlong.wezterm",
+        "homebrew": "--cask wezterm"
+      }
+    },
+    {
+      "id": "foot",
+      "name": "Foot",
+      "description": "Lightweight Wayland-native terminal emulator",
+      "category": "Terminal",
+      "icon": "wayland",
+      "targets": {
+        "ubuntu": "foot",
+        "debian": "foot",
+        "arch": "foot",
+        "fedora": "foot",
+        "opensuse": "foot",
+        "nix": "foot",
+        "homebrew": "foot"
+      }
+    },
+    {
+      "id": "ghostty",
+      "name": "Ghostty",
+      "description": "Native GPU-accelerated terminal by Mitchell Hashimoto",
+      "category": "Terminal",
+      "icon": "ghost",
+      "targets": {
+        "arch": "ghostty",
+        "nix": "ghostty",
+        "homebrew": "--cask ghostty"
+      }
+    },
+    {
+      "id": "btop",
+      "name": "btop",
+      "description": "Beautiful terminal resource monitor with graphs",
+      "category": "CLI Tools",
+      "icon": "monitor",
+      "targets": {
+        "ubuntu": "btop",
+        "debian": "btop",
+        "arch": "btop",
+        "fedora": "btop",
+        "opensuse": "btop",
+        "nix": "btop",
+        "homebrew": "btop"
+      }
+    },
+    {
+      "id": "htop",
+      "name": "htop",
+      "description": "Interactive process viewer and system monitor",
+      "category": "CLI Tools",
+      "icon": "chart",
+      "targets": {
+        "ubuntu": "htop",
+        "debian": "htop",
+        "arch": "htop",
+        "fedora": "htop",
+        "opensuse": "htop",
+        "nix": "htop",
+        "snap": "htop",
+        "homebrew": "htop"
+      }
+    },
+    {
+      "id": "fastfetch",
+      "name": "fastfetch",
+      "description": "Fast neofetch-like system info tool",
+      "category": "CLI Tools",
+      "icon": "console",
+      "targets": {
+        "ubuntu": "fastfetch",
+        "debian": "fastfetch",
+        "fedora": "fastfetch",
+        "arch": "fastfetch",
+        "opensuse": "fastfetch",
+        "nix": "fastfetch",
+        "homebrew": "fastfetch"
+      }
+    },
+    {
+      "id": "eza",
+      "name": "eza",
+      "description": "Modern ls replacement with colors and icons",
+      "category": "CLI Tools",
+      "icon": "list",
+      "targets": {
+        "ubuntu": "eza",
+        "debian": "eza",
+        "arch": "eza",
+        "opensuse": "eza",
+        "nix": "eza",
+        "homebrew": "eza"
+      }
+    },
+    {
+      "id": "bat",
+      "name": "bat",
+      "description": "Cat clone with syntax highlighting and git integration",
+      "category": "CLI Tools",
+      "icon": "file-code",
+      "targets": {
+        "ubuntu": "bat",
+        "debian": "bat",
+        "arch": "bat",
+        "fedora": "bat",
+        "opensuse": "bat",
+        "nix": "bat",
+        "homebrew": "bat"
+      }
+    },
+    {
+      "id": "fzf",
+      "name": "fzf",
+      "description": "Lightning-fast command-line fuzzy finder",
+      "category": "CLI Tools",
+      "icon": "magnify",
+      "targets": {
+        "ubuntu": "fzf",
+        "debian": "fzf",
+        "arch": "fzf",
+        "fedora": "fzf",
+        "opensuse": "fzf",
+        "nix": "fzf",
+        "homebrew": "fzf"
+      }
+    },
+    {
+      "id": "ripgrep",
+      "name": "ripgrep",
+      "description": "Ultra-fast recursive search respecting .gitignore",
+      "category": "CLI Tools",
+      "icon": "search",
+      "targets": {
+        "ubuntu": "ripgrep",
+        "debian": "ripgrep",
+        "arch": "ripgrep",
+        "fedora": "ripgrep",
+        "opensuse": "ripgrep",
+        "nix": "ripgrep",
+        "homebrew": "ripgrep"
+      }
+    },
+    {
+      "id": "zoxide",
+      "name": "zoxide",
+      "description": "Smart cd that learns your habits",
+      "category": "CLI Tools",
+      "icon": "folder-move",
+      "targets": {
+        "ubuntu": "zoxide",
+        "debian": "zoxide",
+        "arch": "zoxide",
+        "fedora": "zoxide",
+        "opensuse": "zoxide",
+        "nix": "zoxide",
+        "homebrew": "zoxide"
+      }
+    },
+    {
+      "id": "tldr",
+      "name": "tldr",
+      "description": "Simplified community-driven man pages",
+      "category": "CLI Tools",
+      "icon": "book",
+      "targets": {
+        "arch": "tldr",
+        "fedora": "tldr",
+        "nix": "tldr",
+        "homebrew": "tldr"
+      }
+    },
+    {
+      "id": "wget",
+      "name": "wget",
+      "description": "Command-line file downloader for HTTP/FTP",
+      "category": "CLI Tools",
+      "icon": "download",
+      "targets": {
+        "ubuntu": "wget",
+        "debian": "wget",
+        "arch": "wget",
+        "fedora": "wget",
+        "opensuse": "wget",
+        "nix": "wget",
+        "homebrew": "wget"
+      }
+    },
+    {
+      "id": "curl",
+      "name": "curl",
+      "description": "Command-line tool for transferring data via URLs",
+      "category": "CLI Tools",
+      "icon": "curl",
+      "targets": {
+        "ubuntu": "curl",
+        "debian": "curl",
+        "arch": "curl",
+        "fedora": "curl",
+        "opensuse": "curl",
+        "nix": "curl",
+        "homebrew": "curl"
+      }
+    },
+    {
+      "id": "aria2",
+      "name": "aria2",
+      "description": "Multi-protocol, multi-source download accelerator",
+      "category": "CLI Tools",
+      "icon": "download-multiple",
+      "targets": {
+        "ubuntu": "aria2",
+        "debian": "aria2",
+        "arch": "aria2",
+        "fedora": "aria2",
+        "opensuse": "aria2",
+        "nix": "aria2",
+        "homebrew": "aria2"
+      }
+    },
+    {
+      "id": "yazi",
+      "name": "yazi",
+      "description": "Blazing fast terminal file manager in Rust",
+      "category": "CLI Tools",
+      "icon": "folder-table",
+      "targets": {
+        "arch": "yazi",
+        "opensuse": "yazi",
+        "nix": "yazi",
+        "homebrew": "yazi"
+      }
+    },
+    {
+      "id": "ranger",
+      "name": "ranger",
+      "description": "Vim-inspired terminal file manager with previews",
+      "category": "CLI Tools",
+      "icon": "folder-key",
+      "targets": {
+        "ubuntu": "ranger",
+        "debian": "ranger",
+        "arch": "ranger",
+        "fedora": "ranger",
+        "opensuse": "ranger",
+        "nix": "ranger",
+        "homebrew": "ranger"
+      }
+    },
+    {
+      "id": "ncdu",
+      "name": "ncdu",
+      "description": "NCurses-based disk usage analyzer",
+      "category": "CLI Tools",
+      "icon": "chart-arc",
+      "targets": {
+        "ubuntu": "ncdu",
+        "debian": "ncdu",
+        "arch": "ncdu",
+        "fedora": "ncdu",
+        "opensuse": "ncdu",
+        "nix": "ncdu",
+        "homebrew": "ncdu"
+      }
+    },
+    {
+      "id": "fd",
+      "name": "fd",
+      "description": "Simple, fast alternative to find command",
+      "category": "CLI Tools",
+      "icon": "file-search",
+      "targets": {
+        "ubuntu": "fd-find",
+        "debian": "fd-find",
+        "arch": "fd",
+        "fedora": "fd-find",
+        "opensuse": "fd",
+        "nix": "fd",
+        "homebrew": "fd"
+      }
+    },
+    {
+      "id": "tmux",
+      "name": "tmux",
+      "description": "Terminal session manager and multiplexer",
+      "category": "CLI Tools",
+      "icon": "tmux",
+      "targets": {
+        "ubuntu": "tmux",
+        "debian": "tmux",
+        "arch": "tmux",
+        "fedora": "tmux",
+        "opensuse": "tmux",
+        "nix": "tmux",
+        "homebrew": "tmux"
+      }
+    },
+    {
+      "id": "zellij",
+      "name": "Zellij",
+      "description": "Modern terminal multiplexer with layout system",
+      "category": "CLI Tools",
+      "icon": "view-split",
+      "targets": {
+        "ubuntu": "zellij",
+        "arch": "zellij",
+        "fedora": "zellij",
+        "opensuse": "zellij",
+        "nix": "zellij",
+        "homebrew": "zellij"
+      }
+    },
+    {
+      "id": "superfile",
+      "name": "Superfile",
+      "description": "Modern terminal file manager with TUI",
+      "category": "CLI Tools",
+      "icon": "folder-multiple",
+      "targets": {
+        "arch": "superfile",
+        "nix": "superfile",
+        "homebrew": "superfile"
+      }
+    },
+    {
+      "id": "rsync",
+      "name": "rsync",
+      "description": "Fast incremental file transfer and sync tool",
+      "category": "CLI Tools",
+      "icon": "sync",
+      "targets": {
+        "ubuntu": "rsync",
+        "debian": "rsync",
+        "arch": "rsync",
+        "fedora": "rsync",
+        "opensuse": "rsync",
+        "nix": "rsync",
+        "homebrew": "rsync"
+      }
+    },
+    {
+      "id": "vlc",
+      "name": "VLC",
+      "description": "Universal media player that plays any format",
+      "category": "Media",
+      "icon": "vlcmediaplayer",
+      "targets": {
+        "ubuntu": "vlc",
+        "debian": "vlc",
+        "arch": "vlc",
+        "fedora": "vlc",
+        "opensuse": "vlc",
+        "nix": "vlc",
+        "flatpak": "org.videolan.VLC",
+        "snap": "vlc",
+        "homebrew": "--cask vlc"
+      }
+    },
+    {
+      "id": "mpv",
+      "name": "mpv",
+      "description": "Lightweight and highly configurable media player",
+      "category": "Media",
+      "icon": "mpv",
+      "targets": {
+        "ubuntu": "mpv",
+        "debian": "mpv",
+        "arch": "mpv",
+        "fedora": "mpv",
+        "opensuse": "mpv",
+        "nix": "mpv",
+        "flatpak": "io.mpv.Mpv",
+        "snap": "mpv",
+        "homebrew": "mpv"
+      }
+    },
+    {
+      "id": "celluloid",
+      "name": "Celluloid",
+      "description": "Simple GTK frontend for the mpv player",
+      "category": "Media",
+      "icon": "gnome",
+      "targets": {
+        "ubuntu": "celluloid",
+        "debian": "celluloid",
+        "arch": "celluloid",
+        "fedora": "celluloid",
+        "opensuse": "celluloid",
+        "nix": "celluloid",
+        "flatpak": "io.github.celluloid_player.Celluloid"
+      }
+    },
+    {
+      "id": "strawberry",
+      "name": "Strawberry",
+      "description": "Music player for local audio collection",
+      "category": "Media",
+      "icon": "strawberry",
+      "targets": {
+        "ubuntu": "strawberry",
+        "debian": "strawberry",
+        "arch": "strawberry",
+        "fedora": "strawberry",
+        "opensuse": "strawberry",
+        "nix": "strawberry",
+        "flatpak": "org.strawberrymusicplayer.strawberry"
+      }
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "description": "Popular music streaming service",
+      "category": "Media",
+      "icon": "spotify",
+      "targets": {
+        "arch": "spotify",
+        "nix": "spotify",
+        "flatpak": "com.spotify.Client",
+        "snap": "spotify",
+        "homebrew": "--cask spotify"
+      }
+    },
+    {
+      "id": "audacity",
+      "name": "Audacity",
+      "description": "Free open-source audio editor and recorder",
+      "category": "Media",
+      "icon": "audacity",
+      "targets": {
+        "ubuntu": "audacity",
+        "debian": "audacity",
+        "arch": "audacity",
+        "fedora": "audacity",
+        "opensuse": "audacity",
+        "nix": "audacity",
+        "flatpak": "org.audacityteam.Audacity",
+        "snap": "audacity",
+        "homebrew": "--cask audacity"
+      }
+    },
+    {
+      "id": "kdenlive",
+      "name": "Kdenlive",
+      "description": "Powerful open-source video editor by KDE",
+      "category": "Media",
+      "icon": "kdenlive",
+      "targets": {
+        "ubuntu": "kdenlive",
+        "debian": "kdenlive",
+        "arch": "kdenlive",
+        "fedora": "kdenlive",
+        "opensuse": "kdenlive",
+        "nix": "kdenlive",
+        "flatpak": "org.kde.kdenlive",
+        "snap": "kdenlive",
+        "homebrew": "--cask kdenlive"
+      }
+    },
+    {
+      "id": "obs",
+      "name": "OBS Studio",
+      "description": "Industry-standard streaming and recording software",
+      "category": "Media",
+      "icon": "obsstudio",
+      "targets": {
+        "ubuntu": "obs-studio",
+        "debian": "obs-studio",
+        "arch": "obs-studio",
+        "fedora": "obs-studio",
+        "opensuse": "obs-studio",
+        "nix": "obs-studio",
+        "flatpak": "com.obsproject.Studio",
+        "snap": "obs-studio",
+        "homebrew": "--cask obs"
+      }
+    },
+    {
+      "id": "ffmpeg",
+      "name": "FFmpeg",
+      "description": "Swiss army knife of video/audio processing",
+      "category": "Media",
+      "icon": "ffmpeg",
+      "targets": {
+        "ubuntu": "ffmpeg",
+        "debian": "ffmpeg",
+        "arch": "ffmpeg",
+        "fedora": "ffmpeg",
+        "opensuse": "ffmpeg",
+        "nix": "ffmpeg",
+        "homebrew": "ffmpeg"
+      }
+    },
+    {
+      "id": "handbrake",
+      "name": "HandBrake",
+      "description": "Open-source video transcoder for any format",
+      "category": "Media",
+      "icon": "video",
+      "targets": {
+        "ubuntu": "handbrake",
+        "debian": "handbrake",
+        "arch": "handbrake",
+        "opensuse": "handbrake",
+        "nix": "handbrake",
+        "flatpak": "fr.handbrake.ghb",
+        "snap": "handbrake-jz",
+        "homebrew": "handbrake"
+      }
+    },
+    {
+      "id": "stremio",
+      "name": "Stremio",
+      "description": "Modern media center with streaming addons",
+      "category": "Media",
+      "icon": "stremio",
+      "targets": {
+        "arch": "stremio",
+        "nix": "stremio",
+        "flatpak": "com.stremio.Stremio",
+        "homebrew": "--cask stremio"
+      }
+    },
+    {
+      "id": "kodi",
+      "name": "Kodi",
+      "description": "Open-source home theater and media center",
+      "category": "Media",
+      "icon": "kodi",
+      "targets": {
+        "ubuntu": "kodi",
+        "debian": "kodi",
+        "arch": "kodi",
+        "fedora": "kodi",
+        "opensuse": "kodi",
+        "nix": "kodi",
+        "flatpak": "tv.kodi.Kodi",
+        "snap": "kodi",
+        "homebrew": "--cask kodi"
+      }
+    },
+    {
+      "id": "haruna",
+      "name": "Haruna",
+      "description": "Modern Qt/QML video player powered by mpv",
+      "category": "Media",
+      "icon": "haruna",
+      "targets": {
+        "ubuntu": "haruna",
+        "debian": "haruna",
+        "arch": "haruna",
+        "fedora": "haruna",
+        "opensuse": "haruna",
+        "nix": "haruna",
+        "flatpak": "org.kde.haruna",
+        "snap": "haruna"
+      }
+    },
+    {
+      "id": "shortwave",
+      "name": "Shortwave",
+      "description": "Listen to internet radio stations worldwide",
+      "category": "Media",
+      "icon": "radio",
+      "targets": {
+        "ubuntu": "shortwave",
+        "debian": "shortwave",
+        "arch": "shortwave",
+        "fedora": "shortwave",
+        "opensuse": "shortwave",
+        "nix": "shortwave",
+        "flatpak": "de.haeckerfelix.Shortwave",
+        "snap": "shortwave",
+        "homebrew": "--cask shortwave"
+      }
+    },
+    {
+      "id": "parabolic",
+      "name": "Parabolic",
+      "description": "Simple YouTube video and audio downloader",
+      "category": "Media",
+      "icon": "parabolic",
+      "targets": {
+        "nix": "parabolic",
+        "flatpak": "org.nickvision.tubeconverter",
+        "snap": "tube-converter"
+      }
+    },
+    {
+      "id": "blender",
+      "name": "Blender",
+      "description": "Industry-grade 3D creation suite",
+      "category": "Creative",
+      "icon": "blender",
+      "targets": {
+        "ubuntu": "blender",
+        "debian": "blender",
+        "arch": "blender",
+        "fedora": "blender",
+        "opensuse": "blender",
+        "nix": "blender",
+        "flatpak": "org.blender.Blender",
+        "snap": "blender --classic",
+        "homebrew": "--cask blender"
+      }
+    },
+    {
+      "id": "gimp",
+      "name": "GIMP",
+      "description": "Powerful free image editor, Photoshop alternative",
+      "category": "Creative",
+      "icon": "gimp",
+      "targets": {
+        "ubuntu": "gimp",
+        "debian": "gimp",
+        "arch": "gimp",
+        "fedora": "gimp",
+        "opensuse": "gimp",
+        "nix": "gimp",
+        "flatpak": "org.gimp.GIMP",
+        "snap": "gimp",
+        "homebrew": "--cask gimp"
+      }
+    },
+    {
+      "id": "inkscape",
+      "name": "Inkscape",
+      "description": "Professional vector graphics editor",
+      "category": "Creative",
+      "icon": "inkscape",
+      "targets": {
+        "ubuntu": "inkscape",
+        "debian": "inkscape",
+        "arch": "inkscape",
+        "fedora": "inkscape",
+        "opensuse": "inkscape",
+        "nix": "inkscape",
+        "flatpak": "org.inkscape.Inkscape",
+        "snap": "inkscape",
+        "homebrew": "--cask inkscape"
+      }
+    },
+    {
+      "id": "krita",
+      "name": "Krita",
+      "description": "Professional digital painting application",
+      "category": "Creative",
+      "icon": "krita",
+      "targets": {
+        "ubuntu": "krita",
+        "debian": "krita",
+        "arch": "krita",
+        "fedora": "krita",
+        "opensuse": "krita",
+        "nix": "krita",
+        "flatpak": "org.kde.krita",
+        "snap": "krita",
+        "homebrew": "--cask krita"
+      }
+    },
+    {
+      "id": "darktable",
+      "name": "Darktable",
+      "description": "Professional photography workflow application",
+      "category": "Creative",
+      "icon": "darktable",
+      "targets": {
+        "ubuntu": "darktable",
+        "debian": "darktable",
+        "arch": "darktable",
+        "fedora": "darktable",
+        "opensuse": "darktable",
+        "nix": "darktable",
+        "flatpak": "org.darktable.Darktable",
+        "snap": "darktable",
+        "homebrew": "--cask darktable"
+      }
+    },
+    {
+      "id": "freecad",
+      "name": "FreeCAD",
+      "description": "Open-source parametric 3D CAD modeler",
+      "category": "Creative",
+      "icon": "freecad",
+      "targets": {
+        "ubuntu": "freecad",
+        "debian": "freecad",
+        "arch": "freecad",
+        "fedora": "freecad",
+        "opensuse": "freecad",
+        "nix": "freecad",
+        "flatpak": "org.freecad.FreeCAD",
+        "snap": "freecad",
+        "homebrew": "--cask freecad"
+      }
+    },
+    {
+      "id": "kicad",
+      "name": "KiCad",
+      "description": "Professional PCB and schematic design suite",
+      "category": "Creative",
+      "icon": "kicad",
+      "targets": {
+        "ubuntu": "kicad",
+        "debian": "kicad",
+        "arch": "kicad",
+        "fedora": "kicad",
+        "opensuse": "kicad",
+        "nix": "kicad",
+        "flatpak": "org.kicad.KiCad",
+        "snap": "kicad",
+        "homebrew": "--cask kicad"
+      }
+    },
+    {
+      "id": "cura",
+      "name": "UltiMaker Cura",
+      "description": "Popular 3D printer slicing application",
+      "category": "Creative",
+      "icon": "cura",
+      "targets": {
+        "arch": "cura",
+        "fedora": "cura",
+        "opensuse": "cura",
+        "nix": "cura",
+        "flatpak": "com.ultimaker.cura",
+        "snap": "cura-slicer",
+        "homebrew": "--cask ultimaker-cura"
+      }
+    },
+    {
+      "id": "godot",
+      "name": "Godot Engine",
+      "description": "Feature-packed, cross-platform game engine",
+      "category": "Creative",
+      "icon": "godotengine",
+      "targets": {
+        "ubuntu": "godot",
+        "debian": "godot",
+        "arch": "godot",
+        "fedora": "godot",
+        "nix": "godot",
+        "flatpak": "org.godotengine.Godot",
+        "snap": "godot-4",
+        "homebrew": "--cask godot"
+      }
+    },
+    {
+      "id": "kolourpaint",
+      "name": "KolourPaint",
+      "description": "Easy-to-use paint program by KDE",
+      "category": "Creative",
+      "icon": "kolourpaint",
+      "targets": {
+        "ubuntu": "kolourpaint",
+        "debian": "kolourpaint",
+        "arch": "kolourpaint",
+        "fedora": "kolourpaint",
+        "opensuse": "kolourpaint",
+        "nix": "kdePackages.kolourpaint",
+        "flatpak": "org.kde.kolourpaint",
+        "snap": "kolourpaint"
+      }
+    },
+    {
+      "id": "orcaslicer",
+      "name": "OrcaSlicer",
+      "description": "Advanced 3D printer slicer based on BambuStudio",
+      "category": "Creative",
+      "icon": "printer-3d-nozzle",
+      "targets": {
+        "arch": "orca-slicer-bin",
+        "nix": "orca-slicer",
+        "homebrew": "--cask orcaslicer"
+      }
+    },
+    {
+      "id": "davinci-resolve",
+      "name": "DaVinci Resolve",
+      "description": "Professional video editing, color grading, and VFX software",
+      "category": "Creative",
+      "icon": "davinciresolve",
+      "targets": {
+        "nix": "davinci-resolve"
+      }
+    },
+    {
+      "id": "steam",
+      "name": "Steam",
+      "description": "Largest PC gaming platform and store",
+      "category": "Gaming",
+      "icon": "steam",
+      "targets": {
+        "ubuntu": "steam",
+        "fedora": "steam",
+        "opensuse": "steam",
+        "nix": "steam",
+        "flatpak": "com.valvesoftware.Steam",
+        "snap": "steam",
+        "homebrew": "--cask steam"
+      }
+    },
+    {
+      "id": "lutris",
+      "name": "Lutris",
+      "description": "Open gaming platform for all your games",
+      "category": "Gaming",
+      "icon": "lutris",
+      "targets": {
+        "ubuntu": "lutris",
+        "arch": "lutris",
+        "fedora": "lutris",
+        "opensuse": "lutris",
+        "nix": "lutris",
+        "flatpak": "net.lutris.Lutris"
+      }
+    },
+    {
+      "id": "heroic",
+      "name": "Heroic",
+      "description": "Open-source Epic Games and GOG launcher",
+      "category": "Gaming",
+      "icon": "heroicgameslauncher",
+      "targets": {
+        "arch": "heroic-games-launcher-bin",
+        "nix": "heroic",
+        "flatpak": "com.heroicgameslauncher.hgl",
+        "homebrew": "--cask heroic"
+      }
+    },
+    {
+      "id": "prism",
+      "name": "Prism Launcher",
+      "description": "Open-source Minecraft launcher with mod support",
+      "category": "Gaming",
+      "icon": "prismlauncher",
+      "targets": {
+        "arch": "prismlauncher",
+        "nix": "prismlauncher",
+        "flatpak": "org.prismlauncher.PrismLauncher",
+        "homebrew": "--cask prismlauncher"
+      }
+    },
+    {
+      "id": "retroarch",
+      "name": "RetroArch",
+      "description": "All-in-one emulator frontend for retro gaming",
+      "category": "Gaming",
+      "icon": "retroarch",
+      "targets": {
+        "ubuntu": "retroarch",
+        "debian": "retroarch",
+        "arch": "retroarch",
+        "fedora": "retroarch",
+        "opensuse": "retroarch",
+        "nix": "retroarch",
+        "flatpak": "org.libretro.RetroArch",
+        "snap": "retroarch",
+        "homebrew": "--cask retroarch"
+      }
+    },
+    {
+      "id": "mangohud",
+      "name": "MangoHud",
+      "description": "Vulkan/OpenGL overlay for monitoring FPS and hardware",
+      "category": "Gaming",
+      "icon": "mangohud",
+      "targets": {
+        "ubuntu": "mangohud",
+        "debian": "mangohud",
+        "arch": "mangohud",
+        "fedora": "mangohud",
+        "opensuse": "mangohud",
+        "nix": "mangohud"
+      }
+    },
+    {
+      "id": "gamemode",
+      "name": "GameMode",
+      "description": "Optimizes Linux system performance for gaming",
+      "category": "Gaming",
+      "icon": "gamemode",
+      "targets": {
+        "ubuntu": "gamemode",
+        "debian": "gamemode",
+        "arch": "gamemode",
+        "fedora": "gamemode",
+        "opensuse": "gamemode",
+        "nix": "gamemode"
+      }
+    },
+    {
+      "id": "protonup",
+      "name": "ProtonUp-Qt",
+      "description": "Install and manage Proton-GE for Steam games",
+      "category": "Gaming",
+      "icon": "protondb",
+      "targets": {
+        "arch": "protonup-qt-bin",
+        "nix": "protonup-qt",
+        "flatpak": "net.davidotek.pupgui2"
+      }
+    },
+    {
+      "id": "antimicrox",
+      "name": "AntiMicroX",
+      "description": "Map gamepad buttons to keyboard/mouse actions",
+      "category": "Gaming",
+      "icon": "controller",
+      "targets": {
+        "ubuntu": "antimicrox",
+        "debian": "antimicrox",
+        "arch": "antimicrox",
+        "fedora": "antimicrox",
+        "opensuse": "antimicrox",
+        "nix": "antimicrox",
+        "flatpak": "io.github.antimicrox.antimicrox"
+      }
+    },
+    {
+      "id": "goverlay",
+      "name": "GOverlay",
+      "description": "GUI for MangoHud, vkBasalt, and ReplaySorcery",
+      "category": "Gaming",
+      "icon": "goverlay",
+      "targets": {
+        "ubuntu": "goverlay",
+        "debian": "goverlay",
+        "arch": "goverlay",
+        "fedora": "goverlay",
+        "opensuse": "goverlay",
+        "nix": "goverlay",
+        "flatpak": "io.github.benjamimgois.goverlay"
+      }
+    },
+    {
+      "id": "libreoffice",
+      "name": "LibreOffice",
+      "description": "Full-featured open-source office suite",
+      "category": "Office",
+      "icon": "libreoffice",
+      "targets": {
+        "ubuntu": "libreoffice",
+        "debian": "libreoffice",
+        "arch": "libreoffice-fresh",
+        "fedora": "libreoffice",
+        "opensuse": "libreoffice",
+        "nix": "libreoffice",
+        "flatpak": "org.libreoffice.LibreOffice",
+        "snap": "libreoffice",
+        "homebrew": "--cask libreoffice"
+      }
+    },
+    {
+      "id": "onlyoffice",
+      "name": "OnlyOffice",
+      "description": "Modern office suite with MS Office compatibility",
+      "category": "Office",
+      "icon": "onlyoffice",
+      "targets": {
+        "arch": "onlyoffice-bin",
+        "nix": "onlyoffice-bin",
+        "flatpak": "org.onlyoffice.desktopeditors",
+        "snap": "onlyoffice-desktopeditors",
+        "homebrew": "--cask onlyoffice"
+      }
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "description": "Popular Markdown-based knowledge management app",
+      "category": "Office",
+      "icon": "obsidian",
+      "targets": {
+        "arch": "obsidian",
+        "nix": "obsidian",
+        "flatpak": "md.obsidian.Obsidian",
+        "snap": "obsidian --classic",
+        "homebrew": "--cask obsidian"
+      }
+    },
+    {
+      "id": "logseq",
+      "name": "Logseq",
+      "description": "Open-source outliner for knowledge management",
+      "category": "Office",
+      "icon": "logseq",
+      "targets": {
+        "arch": "logseq-desktop-bin",
+        "nix": "logseq",
+        "flatpak": "com.logseq.Logseq",
+        "snap": "logseq",
+        "homebrew": "--cask logseq"
+      }
+    },
+    {
+      "id": "joplin",
+      "name": "Joplin",
+      "description": "Open-source note-taking with sync and encryption",
+      "category": "Office",
+      "icon": "joplin",
+      "targets": {
+        "arch": "joplin-appimage",
+        "nix": "joplin-desktop",
+        "flatpak": "net.cozic.joplin_desktop",
+        "snap": "joplin-desktop",
+        "homebrew": "--cask joplin"
+      }
+    },
+    {
+      "id": "okular",
+      "name": "Okular",
+      "description": "Universal document viewer by KDE",
+      "category": "Office",
+      "icon": "kde",
+      "targets": {
+        "ubuntu": "okular",
+        "debian": "okular",
+        "arch": "okular",
+        "fedora": "okular",
+        "opensuse": "okular",
+        "nix": "okular",
+        "flatpak": "org.kde.okular",
+        "snap": "okular"
+      }
+    },
+    {
+      "id": "zathura",
+      "name": "Zathura",
+      "description": "Vim-style minimal PDF/document viewer",
+      "category": "Office",
+      "icon": "zathura",
+      "targets": {
+        "ubuntu": "zathura",
+        "debian": "zathura",
+        "arch": "zathura",
+        "fedora": "zathura",
+        "opensuse": "zathura",
+        "nix": "zathura"
+      }
+    },
+    {
+      "id": "calibre",
+      "name": "Calibre",
+      "description": "Complete e-book library management solution",
+      "category": "Office",
+      "icon": "calibreweb",
+      "targets": {
+        "ubuntu": "calibre",
+        "debian": "calibre",
+        "arch": "calibre",
+        "fedora": "calibre",
+        "opensuse": "calibre",
+        "nix": "calibre",
+        "flatpak": "com.calibre_ebook.calibre",
+        "homebrew": "--cask calibre"
+      }
+    },
+    {
+      "id": "xournalpp",
+      "name": "Xournal++",
+      "description": "Handwriting and PDF annotation app",
+      "category": "Office",
+      "icon": "pdf",
+      "targets": {
+        "ubuntu": "xournalpp",
+        "debian": "xournalpp",
+        "arch": "xournalpp",
+        "fedora": "xournalpp",
+        "opensuse": "xournalpp",
+        "nix": "xournalpp",
+        "flatpak": "com.github.xournalpp.xournalpp",
+        "homebrew": "--cask xournal++"
+      }
+    },
+    {
+      "id": "zotero",
+      "name": "Zotero",
+      "description": "Research reference manager and citation tool",
+      "category": "Office",
+      "icon": "zotero",
+      "targets": {
+        "arch": "zotero-bin",
+        "opensuse": "zotero",
+        "nix": "zotero",
+        "flatpak": "org.zotero.Zotero",
+        "snap": "zotero-snap",
+        "homebrew": "--cask zotero"
+      }
+    },
+    {
+      "id": "trilium",
+      "name": "Trilium Notes",
+      "description": "Hierarchical note-taking app with powerful features",
+      "category": "Office",
+      "icon": "trilium",
+      "targets": {
+        "arch": "trilium-bin",
+        "nix": "trilium-desktop",
+        "flatpak": "com.github.zadam.trilium",
+        "homebrew": "--cask trilium-notes"
+      }
+    },
+    {
+      "id": "protonvpn",
+      "name": "Proton VPN",
+      "description": "Secure VPN by the makers of ProtonMail",
+      "category": "VPN & Network",
+      "icon": "protonvpn",
+      "targets": {
+        "arch": "proton-vpn-gtk-app",
+        "nix": "protonvpn-gui",
+        "flatpak": "com.protonvpn.www",
+        "homebrew": "--cask protonvpn"
+      }
+    },
+    {
+      "id": "mullvad",
+      "name": "Mullvad VPN",
+      "description": "Privacy-focused VPN with no-logging policy",
+      "category": "VPN & Network",
+      "icon": "mullvad",
+      "targets": {
+        "arch": "mullvad-vpn-bin",
+        "nix": "mullvad-vpn",
+        "homebrew": "--cask mullvad-vpn"
+      }
+    },
+    {
+      "id": "tailscale",
+      "name": "Tailscale",
+      "description": "Zero-config mesh VPN using WireGuard",
+      "category": "VPN & Network",
+      "icon": "tailscale",
+      "targets": {
+        "arch": "tailscale",
+        "fedora": "tailscale",
+        "opensuse": "tailscale",
+        "nix": "tailscale",
+        "homebrew": "tailscale"
+      }
+    },
+    {
+      "id": "wireguard",
+      "name": "WireGuard",
+      "description": "Fast, modern, secure VPN tunnel protocol",
+      "category": "VPN & Network",
+      "icon": "wireguard",
+      "targets": {
+        "ubuntu": "wireguard",
+        "debian": "wireguard",
+        "arch": "wireguard-tools",
+        "fedora": "wireguard-tools",
+        "opensuse": "wireguard-tools",
+        "nix": "wireguard-tools",
+        "homebrew": "wireguard-tools"
+      }
+    },
+    {
+      "id": "openvpn",
+      "name": "OpenVPN",
+      "description": "Full-featured SSL VPN solution",
+      "category": "VPN & Network",
+      "icon": "openvpn",
+      "targets": {
+        "ubuntu": "openvpn",
+        "debian": "openvpn",
+        "arch": "openvpn",
+        "fedora": "openvpn",
+        "opensuse": "openvpn",
+        "nix": "openvpn",
+        "homebrew": "openvpn"
+      }
+    },
+    {
+      "id": "nmap",
+      "name": "Nmap",
+      "description": "Network discovery and security auditing tool",
+      "category": "VPN & Network",
+      "icon": "nmap",
+      "targets": {
+        "ubuntu": "nmap",
+        "debian": "nmap",
+        "arch": "nmap",
+        "fedora": "nmap",
+        "opensuse": "nmap",
+        "nix": "nmap",
+        "homebrew": "nmap"
+      }
+    },
+    {
+      "id": "openssh",
+      "name": "OpenSSH",
+      "description": "Secure remote login and file transfer via SSH",
+      "category": "VPN & Network",
+      "icon": "ssh",
+      "targets": {
+        "ubuntu": "openssh-client",
+        "debian": "openssh-client",
+        "arch": "openssh",
+        "fedora": "openssh-clients",
+        "opensuse": "openssh",
+        "nix": "openssh",
+        "homebrew": "openssh"
+      }
+    },
+    {
+      "id": "bitwarden",
+      "name": "Bitwarden",
+      "description": "Open-source password manager with cloud sync",
+      "category": "Security",
+      "icon": "bitwarden",
+      "targets": {
+        "arch": "bitwarden",
+        "nix": "bitwarden",
+        "flatpak": "com.bitwarden.desktop",
+        "snap": "bitwarden",
+        "homebrew": "--cask bitwarden"
+      }
+    },
+    {
+      "id": "keepassxc",
+      "name": "KeePassXC",
+      "description": "Secure offline-first password manager",
+      "category": "Security",
+      "icon": "keepassxc",
+      "targets": {
+        "ubuntu": "keepassxc",
+        "debian": "keepassxc",
+        "arch": "keepassxc",
+        "fedora": "keepassxc",
+        "opensuse": "keepassxc",
+        "nix": "keepassxc",
+        "flatpak": "org.keepassxc.KeePassXC",
+        "snap": "keepassxc",
+        "homebrew": "--cask keepassxc"
+      }
+    },
+    {
+      "id": "veracrypt",
+      "name": "VeraCrypt",
+      "description": "Free disk encryption based on TrueCrypt",
+      "category": "Security",
+      "icon": "veracrypt",
+      "targets": {
+        "arch": "veracrypt",
+        "opensuse": "veracrypt",
+        "nix": "veracrypt",
+        "homebrew": "--cask veracrypt"
+      }
+    },
+    {
+      "id": "gnupg",
+      "name": "GnuPG",
+      "description": "GNU Privacy Guard for encryption and signing",
+      "category": "Security",
+      "icon": "gnuprivacyguard",
+      "targets": {
+        "ubuntu": "gnupg",
+        "debian": "gnupg",
+        "arch": "gnupg",
+        "fedora": "gnupg2",
+        "opensuse": "gnupg",
+        "nix": "gnupg",
+        "homebrew": "gnupg"
+      }
+    },
+    {
+      "id": "firejail",
+      "name": "Firejail",
+      "description": "SUID sandbox for restricting app environments",
+      "category": "Security",
+      "icon": "firejail",
+      "targets": {
+        "ubuntu": "firejail",
+        "debian": "firejail",
+        "arch": "firejail",
+        "fedora": "firejail",
+        "opensuse": "firejail",
+        "nix": "firejail"
+      }
+    },
+    {
+      "id": "clamav",
+      "name": "ClamAV",
+      "description": "Open-source antivirus engine for malware detection",
+      "category": "Security",
+      "icon": "clamav",
+      "targets": {
+        "ubuntu": "clamav",
+        "debian": "clamav",
+        "arch": "clamav",
+        "fedora": "clamav",
+        "opensuse": "clamav",
+        "nix": "clamav",
+        "homebrew": "clamav"
+      }
+    },
+    {
+      "id": "syncthing",
+      "name": "Syncthing",
+      "description": "Decentralized peer-to-peer file synchronization",
+      "category": "File Sharing",
+      "icon": "syncthing",
+      "targets": {
+        "ubuntu": "syncthing",
+        "debian": "syncthing",
+        "arch": "syncthing",
+        "fedora": "syncthing",
+        "opensuse": "syncthing",
+        "nix": "syncthing",
+        "flatpak": "me.kozec.syncthingtk",
+        "homebrew": "syncthing"
+      }
+    },
+    {
+      "id": "qbittorrent",
+      "name": "qBittorrent",
+      "description": "Open-source BitTorrent client, uTorrent alternative",
+      "category": "File Sharing",
+      "icon": "qbittorrent",
+      "targets": {
+        "ubuntu": "qbittorrent",
+        "debian": "qbittorrent",
+        "arch": "qbittorrent",
+        "fedora": "qbittorrent",
+        "opensuse": "qbittorrent",
+        "nix": "qbittorrent",
+        "flatpak": "org.qbittorrent.qBittorrent",
+        "snap": "qbittorrent-desktop-tak",
+        "homebrew": "--cask qbittorrent"
+      }
+    },
+    {
+      "id": "transmission",
+      "name": "Transmission",
+      "description": "Lightweight BitTorrent client",
+      "category": "File Sharing",
+      "icon": "transmission",
+      "targets": {
+        "ubuntu": "transmission",
+        "debian": "transmission",
+        "arch": "transmission-gtk",
+        "fedora": "transmission",
+        "opensuse": "transmission",
+        "nix": "transmission_4-gtk",
+        "flatpak": "com.transmissionbt.Transmission",
+        "homebrew": "--cask transmission"
+      }
+    },
+    {
+      "id": "localsend",
+      "name": "LocalSend",
+      "description": "Cross-platform AirDrop alternative for local sharing",
+      "category": "File Sharing",
+      "icon": "localsend",
+      "targets": {
+        "arch": "localsend-bin",
+        "nix": "localsend",
+        "flatpak": "org.localsend.localsend_app",
+        "homebrew": "--cask localsend"
+      }
+    },
+    {
+      "id": "filezilla",
+      "name": "FileZilla",
+      "description": "Cross-platform FTP, FTPS and SFTP client",
+      "category": "File Sharing",
+      "icon": "filezilla",
+      "targets": {
+        "ubuntu": "filezilla",
+        "debian": "filezilla",
+        "arch": "filezilla",
+        "fedora": "filezilla",
+        "opensuse": "filezilla",
+        "nix": "filezilla",
+        "flatpak": "org.filezillaproject.Filezilla"
+      }
+    },
+    {
+      "id": "nextcloud",
+      "name": "Nextcloud",
+      "description": "Self-hosted cloud storage sync client",
+      "category": "File Sharing",
+      "icon": "nextcloud",
+      "targets": {
+        "ubuntu": "nextcloud-desktop",
+        "debian": "nextcloud-desktop",
+        "arch": "nextcloud-client",
+        "fedora": "nextcloud-client",
+        "opensuse": "nextcloud-desktop",
+        "nix": "nextcloud-client",
+        "flatpak": "com.nextcloud.desktopclient.nextcloud",
+        "snap": "nextcloud-desktop-client",
+        "homebrew": "--cask nextcloud"
+      }
+    },
+    {
+      "id": "dropbox",
+      "name": "Dropbox",
+      "description": "Popular cloud file storage and sync service",
+      "category": "File Sharing",
+      "icon": "dropbox",
+      "targets": {
+        "arch": "dropbox",
+        "nix": "dropbox",
+        "flatpak": "com.dropbox.Client",
+        "homebrew": "--cask dropbox"
+      }
+    },
+    {
+      "id": "abdownloadmanager",
+      "name": "AB Download Manager",
+      "description": "Modern download manager with browser integration",
+      "category": "File Sharing",
+      "icon": "download-box",
+      "targets": {
+        "arch": "ab-download-manager-bin"
+      }
+    },
+    {
+      "id": "fdm",
+      "name": "Free Download Manager",
+      "description": "Feature-rich download manager with BitTorrent",
+      "category": "File Sharing",
+      "icon": "progress-download",
+      "targets": {
+        "arch": "freedownloadmanager-bin",
+        "homebrew": "--cask free-download-manager"
+      }
+    },
+    {
+      "id": "gparted",
+      "name": "GParted",
+      "description": "GNOME partition editor for disk management",
+      "category": "System",
+      "icon": "gnome",
+      "targets": {
+        "ubuntu": "gparted",
+        "debian": "gparted",
+        "arch": "gparted",
+        "fedora": "gparted",
+        "opensuse": "gparted",
+        "nix": "gparted"
+      }
+    },
+    {
+      "id": "kde-partition-manager",
+      "name": "KDE Partition Manager",
+      "description": "Utility for management of disk devices, partitions and file systems",
+      "category": "System",
+      "icon": "kde",
+      "targets": {
+        "ubuntu": "partitionmanager",
+        "debian": "partitionmanager",
+        "arch": "partitionmanager",
+        "fedora": "kde-partitionmanager",
+        "opensuse": "partitionmanager",
+        "nix": "partitionmanager",
+        "flatpak": "org.kde.partitionmanager"
+      }
+    },
+    {
+      "id": "kdeconnect",
+      "name": "KDE Connect",
+      "description": "Connect your phone to your Linux desktop",
+      "category": "System",
+      "icon": "kde",
+      "targets": {
+        "ubuntu": "kdeconnect",
+        "debian": "kdeconnect",
+        "arch": "kdeconnect",
+        "fedora": "kdeconnectd",
+        "opensuse": "kdeconnect-kde",
+        "nix": "kdeconnect"
+      }
+    },
+    {
+      "id": "timeshift",
+      "name": "Timeshift",
+      "description": "System snapshot and restore tool like Time Machine",
+      "category": "System",
+      "icon": "backup",
+      "targets": {
+        "ubuntu": "timeshift",
+        "debian": "timeshift",
+        "arch": "timeshift",
+        "fedora": "timeshift",
+        "opensuse": "timeshift",
+        "nix": "timeshift"
+      }
+    },
+    {
+      "id": "bleachbit",
+      "name": "BleachBit",
+      "description": "Free disk space and maintain privacy",
+      "category": "System",
+      "icon": "bleachbit",
+      "targets": {
+        "ubuntu": "bleachbit",
+        "debian": "bleachbit",
+        "arch": "bleachbit",
+        "fedora": "bleachbit",
+        "opensuse": "bleachbit",
+        "nix": "bleachbit",
+        "flatpak": "org.bleachbit.BleachBit"
+      }
+    },
+    {
+      "id": "flameshot",
+      "name": "Flameshot",
+      "description": "Powerful screenshot tool with annotation",
+      "category": "System",
+      "icon": "flameshot",
+      "targets": {
+        "ubuntu": "flameshot",
+        "debian": "flameshot",
+        "arch": "flameshot",
+        "fedora": "flameshot",
+        "opensuse": "flameshot",
+        "nix": "flameshot",
+        "flatpak": "org.flameshot.Flameshot",
+        "homebrew": "--cask flameshot"
+      }
+    },
+    {
+      "id": "gnometweaks",
+      "name": "GNOME Tweaks",
+      "description": "Advanced settings and customization for GNOME",
+      "category": "System",
+      "icon": "gnome",
+      "targets": {
+        "ubuntu": "gnome-tweaks",
+        "debian": "gnome-tweaks",
+        "arch": "gnome-tweaks",
+        "fedora": "gnome-tweaks",
+        "opensuse": "gnome-tweaks",
+        "nix": "gnome-tweaks"
+      }
+    },
+    {
+      "id": "dconf",
+      "name": "dconf Editor",
+      "description": "Low-level configuration editor for GNOME",
+      "category": "System",
+      "icon": "gnome",
+      "targets": {
+        "ubuntu": "dconf-editor",
+        "debian": "dconf-editor",
+        "arch": "dconf-editor",
+        "fedora": "dconf-editor",
+        "opensuse": "dconf-editor",
+        "nix": "dconf-editor"
+      }
+    },
+    {
+      "id": "borgbackup",
+      "name": "BorgBackup",
+      "description": "Deduplicating backup program with compression",
+      "category": "System",
+      "icon": "borgbackup",
+      "targets": {
+        "ubuntu": "borgbackup",
+        "debian": "borgbackup",
+        "arch": "borg",
+        "fedora": "borgbackup",
+        "opensuse": "borgbackup",
+        "nix": "borgbackup",
+        "homebrew": "borgbackup"
+      }
+    },
+    {
+      "id": "restic",
+      "name": "Restic",
+      "description": "Fast, secure, efficient backup program",
+      "category": "System",
+      "icon": "cloud-sync",
+      "targets": {
+        "ubuntu": "restic",
+        "debian": "restic",
+        "arch": "restic",
+        "fedora": "restic",
+        "opensuse": "restic",
+        "nix": "restic",
+        "homebrew": "restic"
+      }
+    },
+    {
+      "id": "flatpaksupport",
+      "name": "Flatpak",
+      "description": "Universal app packaging and sandboxing framework",
+      "category": "System",
+      "icon": "flatpak",
+      "targets": {
+        "ubuntu": "flatpak",
+        "debian": "flatpak",
+        "arch": "flatpak",
+        "fedora": "flatpak",
+        "opensuse": "flatpak",
+        "nix": "flatpak"
+      }
+    },
+    {
+      "id": "filelight",
+      "name": "Filelight",
+      "description": "Interactive disk usage visualization by KDE",
+      "category": "System",
+      "icon": "kde",
+      "targets": {
+        "ubuntu": "filelight",
+        "debian": "filelight",
+        "arch": "filelight",
+        "fedora": "filelight",
+        "opensuse": "filelight",
+        "nix": "filelight",
+        "flatpak": "org.kde.filelight",
+        "snap": "filelight"
+      }
+    },
+    {
+      "id": "conky",
+      "name": "Conky",
+      "description": "Highly configurable desktop system monitor",
+      "category": "System",
+      "icon": "monitor",
+      "targets": {
+        "ubuntu": "conky-all",
+        "debian": "conky-all",
+        "arch": "conky",
+        "fedora": "conky",
+        "opensuse": "conky",
+        "nix": "conky"
+      }
+    },
+    {
+      "id": "fsearch",
+      "name": "FSearch",
+      "description": "Fast file search utility, inspired by Everything",
+      "category": "System",
+      "icon": "search",
+      "targets": {
+        "ubuntu": "fsearch",
+        "debian": "fsearch",
+        "arch": "fsearch",
+        "opensuse": "fsearch",
+        "nix": "fsearch",
+        "flatpak": "com.github.cboxdoerfer.FSearch"
+      }
+    },
+    {
+      "id": "resources",
+      "name": "Resources",
+      "description": "Modern system resource monitor",
+      "category": "System",
+      "icon": "resources",
+      "targets": {
+        "arch": "resources",
+        "nix": "resources",
+        "flatpak": "net.nokyan.Resources"
+      }
+    },
+    {
+      "id": "cpux",
+      "name": "CPU-X",
+      "description": "System profiling and monitoring (CPU-Z alternative)",
+      "category": "System",
+      "icon": "cpu",
+      "targets": {
+        "ubuntu": "cpu-x",
+        "debian": "cpu-x",
+        "arch": "cpu-x",
+        "fedora": "cpu-x",
+        "nix": "cpu-x",
+        "flatpak": "io.github.thetumultuousunicornofdarkness.cpu-x"
+      }
+    },
+    {
+      "id": "missioncenter",
+      "name": "Mission Center",
+      "description": "Fast, modern system monitor with GPU support",
+      "category": "System",
+      "icon": "missioncenter",
+      "targets": {
+        "arch": "mission-center",
+        "nix": "mission-center",
+        "flatpak": "io.missioncenter.MissionCenter",
+        "snap": "mission-center"
+      }
+    }
+  ]
+}
