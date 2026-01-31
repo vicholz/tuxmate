@@ -103,7 +103,7 @@ body::before {
 
 /* ===== HEADER ===== */
 header {
-    padding: 48px 24px 40px;
+    padding: 16px 24px 12px;
     position: relative;
     z-index: 200;
 }
@@ -115,56 +115,66 @@ header {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
 }
 
 .logo-img {
-    width: 72px;
-    height: 72px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
 }
 
 .logo-text h1 {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.3px;
 }
 
 .logo-tagline {
-    font-size: 12px;
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: var(--text-muted);
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
 .header-controls {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
+}
+
+.header-controls .toolbar-btn {
+    padding: 6px 8px;
+    font-size: 0;
+}
+
+.header-controls .toolbar-btn svg {
+    width: 14px;
+    height: 14px;
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding-left: 16px;
+    gap: 8px;
+    padding-left: 10px;
     border-left: 1px solid var(--border-primary);
 }
 
 /* ===== THEME TOGGLE ===== */
 #theme-toggle {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border: none;
     background: var(--bg-secondary);
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -173,14 +183,14 @@ header {
     transition: all 0.2s;
 }
 
+#theme-toggle svg {
+    width: 16px;
+    height: 16px;
+}
+
 #theme-toggle:hover {
     background: var(--bg-hover);
     color: var(--text-primary);
-}
-
-#theme-toggle svg {
-    width: 20px;
-    height: 20px;
 }
 
 /* ===== DISTRO SELECTOR ===== */
@@ -191,15 +201,15 @@ header {
 .distro-button {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 14px;
+    gap: 8px;
+    padding: 6px 10px;
     background: var(--bg-secondary);
     border: none;
-    border-left: 4px solid var(--accent);
-    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.15s;
-    min-width: 160px;
+    min-width: 130px;
 }
 
 .distro-button:hover {
@@ -207,20 +217,20 @@ header {
 }
 
 .distro-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
 
 .distro-name {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--text-primary);
 }
 
 .chevron-down {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     color: var(--text-muted);
     margin-left: auto;
     transition: transform 0.2s;
@@ -299,6 +309,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    margin-bottom: 16px;
 }
 
 .toolbar-btn {
@@ -819,6 +830,16 @@ main {
     gap: 12px;
     padding: 16px 20px;
     border-top: 1px solid var(--border-primary);
+}
+
+.modal-footer .btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.modal-footer .btn svg {
+    flex-shrink: 0;
 }
 
 /* Preset list */

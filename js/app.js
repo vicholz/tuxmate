@@ -404,7 +404,7 @@ class TuxMateApp {
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polyline points="18 15 12 9 6 15"></polyline>
                             </svg>
-                            <span>Preview</span>
+                            <span>Review</span>
                             <span class="count">[${this.selectedApps.size}]</span>
                         </button>
                         <div class="command-display" id="command-display">
@@ -800,7 +800,7 @@ class TuxMateApp {
         modal.innerHTML = `
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Command Preview</h3>
+                    <h3>Review Script</h3>
                     <button class="modal-close">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -808,7 +808,21 @@ class TuxMateApp {
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="modal-close-btn">Close</button>
-                    <button class="btn btn-primary" id="modal-copy-btn">Copy Command</button>
+                    <button class="btn btn-primary" id="modal-download-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download
+                    </button>
+                    <button class="btn btn-primary" id="modal-copy-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
                 </div>
             </div>
         `;
@@ -819,7 +833,10 @@ class TuxMateApp {
             if (e.target.matches('.modal-overlay, .modal-close, #modal-close-btn')) {
                 this.closePreviewModal();
             }
-            if (e.target.matches('#modal-copy-btn')) {
+            if (e.target.matches('#modal-download-btn') || e.target.closest('#modal-download-btn')) {
+                this.downloadScript();
+            }
+            if (e.target.matches('#modal-copy-btn') || e.target.closest('#modal-copy-btn')) {
                 this.copyCommand();
             }
         });
