@@ -8,6 +8,9 @@ let categoryColors = {};
 let apps = [];
 let aurPatterns = [];
 let knownAurPackages = new Set();
+let nixUnfreePackages = new Set();
+let verifiedFlatpaks = new Set();
+let verifiedSnaps = new Set();
 
 // Icon URL generators using Iconify API
 const IconHelper = {
@@ -17,10 +20,26 @@ const IconHelper = {
     vs: (name) => `https://api.iconify.design/vscode-icons/${name}.svg`,
 };
 
-// Generate icon URL from icon name and optional color
-function getIconUrl(iconName, color) {
-    if (!iconName) return '';
-    
+// Generate icon URL from structured icon objects or legacy string names
+function getIconUrl(icon, color) {
+    if (!icon) return '';
+
+    if (typeof icon === 'object') {
+        if (icon.type === 'url' && icon.url) return icon.url;
+        if (icon.url && !icon.set) return icon.url;
+        const set = icon.set;
+        const name = icon.name;
+        const iconColor = icon.color || color;
+        if (set && name) {
+            let url = `https://api.iconify.design/${set}/${name}.svg`;
+            if (iconColor) url += `?color=${encodeURIComponent(iconColor)}`;
+            return url;
+        }
+        return '';
+    }
+
+    const iconName = icon;
+
     // Special cases for specific icons
     const iconMappings = {
         'chromium': 'https://upload.wikimedia.org/wikipedia/commons/2/28/Chromium_Logo.svg',
@@ -39,11 +58,11 @@ function getIconUrl(iconName, color) {
         'firejail': 'https://linux.fi/w/images/1/1f/Firejail-logo.png',
         'clamav': 'https://raw.githubusercontent.com/ivangabriele/clamav-desktop/f60bfafdd23bb455f0468abe5f877d2b76eddfba/assets/icons/icon.svg',
     };
-    
+
     if (iconMappings[iconName]) {
         return iconMappings[iconName];
     }
-    
+
     // MDI icons (Material Design Icons)
     const mdiIcons = [
         'dna', 'api', 'hexadecimal', 'cat', 'ghost', 'ghost-outline', 'monitor', 'monitor-dashboard',
@@ -52,25 +71,25 @@ function getIconUrl(iconName, color) {
         'download', 'download-multiple', 'folder-table', 'folder-table-outline', 'folder-key', 'folder-key-outline',
         'chart-arc', 'file-search', 'file-search-outline', 'view-split', 'view-split-vertical', 'sync',
         'video', 'video-vintage', 'controller', 'dock-window', 'backup', 'backup-restore', 'cloud-sync', 'ssh',
-        'folder-multiple', 'printer-3d-nozzle', 'download-box', 'progress-download'
+        'folder-multiple', 'printer-3d-nozzle', 'download-box', 'progress-download', 'code-braces'
     ];
-    
+
     if (mdiIcons.includes(iconName)) {
         return IconHelper.mdi(iconName, color);
     }
-    
+
     // Logos icons
     const logoIcons = ['chrome', 'bun', 'npm', 'pnpm', 'yarn', 'visual-studio-code'];
     if (logoIcons.includes(iconName)) {
         return IconHelper.lo(iconName);
     }
-    
+
     // VS Code icons
     const vsIcons = ['file-type-shell', 'file-type-cmake', 'file-type-pdf2'];
     if (vsIcons.includes(iconName) || iconName.startsWith('file-type-')) {
         return IconHelper.vs(iconName);
     }
-    
+
     // Default to simple-icons
     return IconHelper.si(iconName, color);
 }
@@ -82,26 +101,27 @@ async function loadData() {
         if (!response.ok) {
             throw new Error(`Failed to load data.json: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
-        // Populate global variables
+
         distros = data.distros.map(d => ({
             ...d,
             iconUrl: getIconUrl(d.icon, d.color)
         }));
-        
+
         categories = data.categories;
         categoryColors = data.categoryColors;
-        aurPatterns = data.aurPatterns;
-        knownAurPackages = new Set(data.knownAurPackages);
-        
-        // Process apps to add icon URLs
+        aurPatterns = data.aurPatterns || ['-bin', '-git', '-appimage'];
+        knownAurPackages = new Set(data.knownAurPackages || []);
+        nixUnfreePackages = new Set((data.nixUnfreePackages || []).map(p => String(p).toLowerCase()));
+        verifiedFlatpaks = new Set(data.verifiedFlatpaks || []);
+        verifiedSnaps = new Set(data.verifiedSnaps || []);
+
         apps = data.apps.map(app => ({
             ...app,
             iconUrl: getIconUrl(app.icon, categoryColors[app.category])
         }));
-        
+
         return true;
     } catch (error) {
         console.error('Error loading data:', error);
@@ -109,23 +129,58 @@ async function loadData() {
     }
 }
 
-// Check if package is from AUR
 function isAurPackage(packageName) {
+    if (!packageName) return false;
     if (knownAurPackages.has(packageName)) return true;
     return aurPatterns.some(pattern => packageName.endsWith(pattern));
 }
 
-// Get apps by category
+function isUnfreePackage(pkg) {
+    if (!pkg) return false;
+    const cleanPkg = pkg.trim().toLowerCase();
+    if (nixUnfreePackages.has(cleanPkg)) return true;
+    for (const unfreePkg of nixUnfreePackages) {
+        if (cleanPkg.includes(unfreePkg)) return true;
+    }
+    return false;
+}
+
+function isFlathubVerified(appId) {
+    return verifiedFlatpaks.has(appId);
+}
+
+function isSnapVerified(snapName) {
+    if (!snapName) return false;
+    const cleanName = snapName.split(' ')[0];
+    return verifiedSnaps.has(cleanName);
+}
+
+function getUniversalTarget(app, distroId) {
+    if (!app || !app.targets) return null;
+    if (distroId in app.targets) return null;
+    if (app.targets.npm) return 'npm';
+    if (app.targets.script) return 'script';
+    return null;
+}
+
+function isAppAvailableForDistro(app, distroId) {
+    if (!app || !app.targets) return false;
+    return (distroId in app.targets) || ('npm' in app.targets) || ('script' in app.targets);
+}
+
+function stripMarkdown(text) {
+    if (!text) return '';
+    return String(text).replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 ($2)');
+}
+
 function getAppsByCategory(category) {
     return apps.filter(app => app.category === category);
 }
 
-// Check if app is available for distro
 function isAppAvailable(app, distroId) {
-    return distroId in app.targets;
+    return isAppAvailableForDistro(app, distroId);
 }
 
-// Get distro by ID
 function getDistroById(distroId) {
     return distros.find(d => d.id === distroId);
 }

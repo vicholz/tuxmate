@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "sync-web": "node scripts/sync-web-data.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

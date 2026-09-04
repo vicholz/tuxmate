@@ -136,8 +136,42 @@ class TuxMateApp {
     }
 
     isAppAvailable(app) {
-        if (!app || !app.targets) return false;
-        return this.selectedDistro in app.targets;
+        return isAppAvailableForDistro(app, this.selectedDistro);
+    }
+
+    getUniversalTarget(app) {
+        return getUniversalTarget(app, this.selectedDistro);
+    }
+
+    hasUnfreePackages() {
+        if (this.selectedDistro !== 'nix') return false;
+        return [...this.selectedApps].some(appId => {
+            const app = apps.find(a => a.id === appId);
+            const pkg = app?.targets?.nix;
+            return pkg && isUnfreePackage(pkg);
+        });
+    }
+
+    getVerificationSource(app) {
+        if (this.selectedDistro === 'flatpak' && app.targets?.flatpak && isFlathubVerified(app.targets.flatpak)) {
+            return 'flathub';
+        }
+        if (this.selectedDistro === 'snap' && app.targets?.snap && isSnapVerified(app.targets.snap)) {
+            return 'snap';
+        }
+        return null;
+    }
+
+    getAppTooltip(app, isFlatpakOnly, flatpakInstalled) {
+        const parts = [app.description];
+        if (app.note) parts.push(app.note);
+        if (!this.isAppAvailable(app) && !isFlatpakOnly && app.unavailableReason) {
+            parts.push(stripMarkdown(app.unavailableReason));
+        }
+        if (isFlatpakOnly && !flatpakInstalled) {
+            parts.push('Select Flatpak package to enable');
+        }
+        return parts.join(' — ');
     }
 
     toggleApp(appId) {
@@ -312,7 +346,7 @@ class TuxMateApp {
                             ${selectedCount > 0 ? `<span class="category-count" style="background: ${color}">${selectedCount}</span>` : ''}
                         </button>
                     </div>
-                    <div class="category-content" style="max-height: ${isExpanded ? '1000px' : '0'}; opacity: ${isExpanded ? '1' : '0'}">
+                    <div class="category-content" style="max-height: ${isExpanded ? 'none' : '0'}; opacity: ${isExpanded ? '1' : '0'}">
                         ${catApps.map(app => this.renderAppItem(app, color)).join('')}
                     </div>
                 </div>
@@ -328,27 +362,28 @@ class TuxMateApp {
         const isFlatpakEnabled = isFlatpakOnly && flatpakInstalled;
         const canSelect = isAvailable || isFlatpakEnabled;
         const isAur = this.selectedDistro === 'arch' && app.targets?.arch && isAurPackage(app.targets.arch);
-        
-        // Use flatpak color for flatpak-only apps, AUR color for AUR, otherwise category color
+        const universalTarget = this.getUniversalTarget(app);
+        const verificationSource = this.getVerificationSource(app);
+        const tooltip = this.escapeHtml(this.getAppTooltip(app, isFlatpakOnly, flatpakInstalled));
+
         let checkboxColor = color;
         if (isFlatpakEnabled) {
-            checkboxColor = '#4A90D9'; // Flatpak blue
+            checkboxColor = '#4A90D9';
         } else if (isAur) {
-            checkboxColor = '#1793d1'; // Arch blue
+            checkboxColor = '#1793d1';
         }
-        
-        // Determine checkbox class - disabled if flatpak-only but flatpak not selected
+
         let checkboxClass = 'checkbox';
         if (isFlatpakOnly && !flatpakInstalled) {
             checkboxClass += ' checkbox-flatpak-disabled';
         }
-        
+
         const availableClass = canSelect ? '' : (isFlatpakOnly ? 'flatpak-only' : 'unavailable');
-        
+
         return `
             <div class="app-item ${availableClass} ${isSelected ? 'selected' : ''}" 
                  data-app="${app.id}"
-                 title="${app.description}${isFlatpakOnly && !flatpakInstalled ? ' (Select Flatpak package to enable)' : ''}">
+                 title="${tooltip}">
                 <div class="${checkboxClass}" style="border-color: ${isSelected ? checkboxColor : (isFlatpakOnly && !flatpakInstalled ? '#4A90D9' : 'var(--border-secondary)')}; background-color: ${isSelected ? checkboxColor : 'transparent'}">
                     ${isSelected ? '<svg viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>' : ''}
                     ${isFlatpakOnly && !flatpakInstalled && !isSelected ? '<svg viewBox="0 0 24 24" fill="#4A90D9" opacity="0.5"><path d="M19 13H5v-2h14v2z"/></svg>' : ''}
@@ -357,6 +392,8 @@ class TuxMateApp {
                 <span class="app-name">${app.name}</span>
                 ${isAur ? '<span class="aur-badge" title="AUR Package">AUR</span>' : ''}
                 ${isFlatpakOnly ? '<span class="flatpak-badge" title="Available via Flatpak only">Flatpak</span>' : ''}
+                ${universalTarget ? `<span class="universal-badge" title="Installed via ${universalTarget}. Requires the correct runtime.">${universalTarget}</span>` : ''}
+                ${verificationSource ? `<span class="verified-badge" title="${verificationSource === 'flathub' ? 'Verified on Flathub' : 'Verified publisher on Snap Store'}">✓</span>` : ''}
             </div>
         `;
     }
@@ -379,6 +416,9 @@ class TuxMateApp {
                             <input type="text" id="search-input" placeholder="Search apps... (/)" value="${this.searchQuery}">
                         </div>
                         <div class="options-buttons">
+                            ${this.hasUnfreePackages() ? `
+                            <div class="unfree-warning" title="Set nixpkgs.config.allowUnfree = true in your Nix config">Unfree packages selected</div>
+                            ` : ''}
                             ${this.selectedDistro !== 'flatpak' && this.selectedDistro !== 'snap' ? `
                             <label class="flatpak-toggle">
                                 <input type="checkbox" id="include-flatpak" ${this.includeFlatpakApps ? 'checked' : ''}>
@@ -444,7 +484,8 @@ class TuxMateApp {
             filtered = filtered.filter(app => 
                 app.name.toLowerCase().includes(query) ||
                 app.id.toLowerCase().includes(query) ||
-                app.description.toLowerCase().includes(query)
+                app.description.toLowerCase().includes(query) ||
+                (app.note && app.note.toLowerCase().includes(query))
             );
         }
         
@@ -503,6 +544,8 @@ class TuxMateApp {
             countEl.textContent = `[${this.selectedApps.size}]`;
         }
         
+        this.updateUnfreeWarning();
+
         // Update button states
         const clearBtn = document.getElementById('clear-btn');
         const downloadBtn = document.getElementById('download-btn');
@@ -578,6 +621,23 @@ class TuxMateApp {
         });
     }
 
+    updateUnfreeWarning() {
+        const buttons = document.querySelector('.options-buttons');
+        if (!buttons) return;
+        let warning = buttons.querySelector('.unfree-warning');
+        if (this.hasUnfreePackages()) {
+            if (!warning) {
+                warning = document.createElement('div');
+                warning.className = 'unfree-warning';
+                warning.title = 'Set nixpkgs.config.allowUnfree = true in your Nix config';
+                warning.textContent = 'Unfree packages selected';
+                buttons.prepend(warning);
+            }
+        } else if (warning) {
+            warning.remove();
+        }
+    }
+
     escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
@@ -630,14 +690,44 @@ class TuxMateApp {
 
         // Keyboard shortcut for search
         document.addEventListener('keydown', (e) => {
-            if (e.key === '/' && !e.target.matches('input, textarea')) {
+            if (e.target.matches('input, textarea, select')) {
+                if (e.key === 'Escape') {
+                    e.target.blur();
+                    this.closePreviewModal();
+                }
+                return;
+            }
+
+            if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+            if (e.key === '/') {
                 e.preventDefault();
                 document.getElementById('search-input')?.focus();
+                return;
             }
-            
+
             if (e.key === 'Escape') {
                 document.getElementById('search-input')?.blur();
                 this.closePreviewModal();
+                return;
+            }
+
+            if (e.key === 't') {
+                this.toggleTheme();
+                return;
+            }
+
+            if (e.key === 'c') {
+                this.clearAll();
+                return;
+            }
+
+            if (this.selectedApps.size === 0) return;
+
+            if (e.key === 'y') {
+                this.copyCommand();
+            } else if (e.key === 'd') {
+                this.downloadScript();
             }
         });
 

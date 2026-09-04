@@ -38,34 +38,36 @@ const CommandGenerator = {
     // Generate command for a distro
     generate(distroId, selectedApps, options = {}) {
         const { helper = 'yay', hasHelper = false } = options;
-        
+
         // Check if flatpaksupport is selected (enables Flatpak app installation)
         const flatpakSelected = selectedApps.includes('flatpaksupport');
-        
-        // Get packages for selected apps
+
         const packages = [];
         const flatpakPackages = [];
-        
+        const npmPackages = [];
+        const scriptPackages = [];
+
         selectedApps.forEach(appId => {
             const app = apps.find(a => a.id === appId);
-            if (!app) return;
-            
+            if (!app || !app.targets) return;
+
             const pkg = app.targets[distroId];
             if (pkg) {
-                // Native package for this distro
                 packages.push(pkg);
+            } else if (app.targets.npm) {
+                npmPackages.push(app.targets.npm);
+            } else if (app.targets.script) {
+                scriptPackages.push(app.targets.script);
             } else if (flatpakSelected && app.targets.flatpak) {
-                // Flatpak-only app (only if flatpak package is selected)
                 flatpakPackages.push(app.targets.flatpak);
             }
         });
 
-        if (packages.length === 0 && flatpakPackages.length === 0) {
+        if (packages.length === 0 && flatpakPackages.length === 0 && npmPackages.length === 0 && scriptPackages.length === 0) {
             return '# Select apps above to generate command';
         }
 
         let command = '';
-        const distro = getDistroById(distroId);
 
         switch (distroId) {
             case 'ubuntu':
@@ -79,9 +81,8 @@ const CommandGenerator = {
                 if (packages.length > 0) {
                     if (this.hasAurPackages(packages)) {
                         if (!hasHelper) {
-                            // Install helper first
                             const helperInstall = this.generateHelperInstall(helper);
-                            command = helperInstall + ' && \\\n' + 
+                            command = helperInstall + ' && \\\n' +
                                 this.generateMultiLine(`${helper} -S --needed --noconfirm`, packages);
                         } else {
                             command = this.generateMultiLine(`${helper} -S --needed --noconfirm`, packages);
@@ -105,16 +106,20 @@ const CommandGenerator = {
                 break;
 
             case 'nix':
-                return this.generateNixConfig(packages);
+                command = packages.length > 0 ? this.generateNixConfig(packages) : '';
+                break;
 
             case 'flatpak':
-                return this.generateFlatpakCommand(packages, true);
+                command = packages.length > 0 ? this.generateFlatpakCommand(packages, true) : '';
+                break;
 
             case 'snap':
-                return this.generateSnapCommand(packages);
+                command = packages.length > 0 ? this.generateSnapCommand(packages) : '';
+                break;
 
             case 'homebrew':
-                return this.generateHomebrewCommand(packages);
+                command = packages.length > 0 ? this.generateHomebrewCommand(packages) : '';
+                break;
 
             default:
                 if (packages.length > 0) {
@@ -124,9 +129,8 @@ const CommandGenerator = {
 
         // Add Flatpak apps if flatpak is selected and there are Flatpak-only apps
         if (flatpakPackages.length > 0 && flatpakSelected && distroId !== 'flatpak') {
-            // Add Flathub repo and install Flatpak apps
             const flatpakCmd = this.generateFlatpakCommand(flatpakPackages, true);
-            
+
             if (command) {
                 command += '\n\n# Install Flatpak apps:\n' + flatpakCmd;
             } else {
@@ -134,7 +138,35 @@ const CommandGenerator = {
             }
         }
 
+        command = this.appendUniversalCommands(command, distroId, npmPackages, scriptPackages);
+
         return command || '# No packages selected';
+    },
+
+    appendUniversalCommands(command, distroId, npmPackages, scriptPackages) {
+        if (npmPackages.length === 0 && scriptPackages.length === 0) {
+            return command;
+        }
+
+        const extras = [];
+        if (npmPackages.length > 0) {
+            extras.push('# Install npm packages:\n' + this.generateMultiLine('npm install -g', npmPackages));
+        }
+        if (scriptPackages.length > 0) {
+            extras.push('# Custom install scripts:\n' + scriptPackages.join('\n'));
+        }
+        const extrasText = extras.join('\n\n');
+
+        if (distroId === 'nix') {
+            const commented = extrasText.split('\n').map(line => line ? `# ${line}` : '#').join('\n');
+            const note = '# NOTE: Universal packages (npm/script) cannot be placed in environment.systemPackages.\n# Run these in a standard terminal:';
+            return (command ? command + '\n\n' : '') + note + '\n' + commented;
+        }
+
+        if (!command || command.startsWith('# No packages') || command.startsWith('# Select apps')) {
+            return extrasText;
+        }
+        return command + '\n\n' + extrasText;
     },
 
     // Get flatpak installation command for a distro
@@ -173,7 +205,14 @@ rm -rf /tmp/${helper}`;
     generateNixConfig(packages) {
         const sortedPkgs = packages.filter(p => p.trim()).sort();
         const pkgList = sortedPkgs.map(p => `    ${p}`).join('\n');
-        return `environment.systemPackages = with pkgs; [\n${pkgList}\n];`;
+        const unfreePkgs = sortedPkgs.filter(pkg => isUnfreePackage(pkg));
+        const unfreeComment = unfreePkgs.length > 0
+            ? `# Unfree: ${unfreePkgs.join(', ')}\n# Requires: nixpkgs.config.allowUnfree = true;\n\n`
+            : '';
+        if (sortedPkgs.length === 0) {
+            return unfreeComment + '# No native nix packages selected';
+        }
+        return `${unfreeComment}environment.systemPackages = with pkgs; [\n${pkgList}\n];`;
     },
 
     // Generate Snap command

@@ -499,13 +499,16 @@ main {
 }
 
 .aur-badge,
-.flatpak-badge {
+.flatpak-badge,
+.universal-badge,
+.verified-badge {
     font-size: 9px;
     font-weight: 600;
     padding: 2px 5px;
     border-radius: 3px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    flex-shrink: 0;
 }
 
 .aur-badge {
@@ -516,6 +519,28 @@ main {
 .flatpak-badge {
     background: #4A90D922;
     color: #4A90D9;
+}
+
+.universal-badge {
+    background: #d9770622;
+    color: #d97706;
+    border: 1px solid #d9770666;
+}
+
+.verified-badge {
+    background: #10b98122;
+    color: #10b981;
+}
+
+.unfree-warning {
+    font-size: 11px;
+    font-weight: 600;
+    color: #f59e0b;
+    background: #f59e0b18;
+    border: 1px solid #f59e0b44;
+    border-radius: 4px;
+    padding: 4px 8px;
+    white-space: nowrap;
 }
 
 /* Flatpak-only disabled state badge */
