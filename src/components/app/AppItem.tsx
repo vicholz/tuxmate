@@ -2,18 +2,9 @@
 
 import { memo } from 'react';
 import { Check } from 'lucide-react';
-import { distros, type DistroId, type AppData } from '@/lib/data';
+import { distros, getIconUrl, type DistroId, type AppData } from '@/lib/data';
 import { isAurPackage } from '@/lib/aur';
 import { AppIcon } from './AppIcon';
-// import { analytics } from '@/lib/analytics'; // Uncomment to enable app selection tracking
-
-/**
- * Individual app row in the category list.
- * Memoized because we render hundreds of these and React was having a moment.
- * Handles selection state, availability indicators, AUR badges, and tooltips.
- */
-
-// Tailwind colors as hex - because CSS variables don't work in inline styles
 const COLOR_MAP: Record<string, string> = {
     'orange': '#f97316',
     'blue': '#3b82f6',
@@ -30,6 +21,7 @@ const COLOR_MAP: Record<string, string> = {
     'green': '#22c55e',
     'teal': '#14b8a6',
     'gray': '#6b7280',
+    'fuchsia': '#d946ef',
 };
 
 interface AppItemProps {
@@ -43,7 +35,6 @@ interface AppItemProps {
     onTooltipLeave: () => void;
     onFocus?: () => void;
     color?: string;
-    // Flatpak/Snap verification status
     isVerified?: boolean;
     verificationSource?: 'flathub' | 'snap' | null;
 }
@@ -62,16 +53,24 @@ export const AppItem = memo(function AppItem({
     isVerified = false,
     verificationSource = null,
 }: AppItemProps) {
-    // Why isn't this app available? Tell the user.
     const getUnavailableText = () => {
         const distroName = distros.find(d => d.id === selectedDistro)?.name || '';
-        return app.unavailableReason || `Not available in ${distroName} repos`;
+        let msg = '';
+        if (!isAvailable) {
+            msg = app.unavailableReason || `Not available in ${distroName} repos`;
+        }
+        if (app.note) {
+            msg = msg ? `${msg} — ${app.note}` : app.note;
+        }
+        return msg;
     };
 
-    // Special styling for AUR packages (Arch users love their badges)
     const isAur = selectedDistro === 'arch' && app.targets?.arch && isAurPackage(app.targets.arch);
+    const universalTarget = !app.targets?.[selectedDistro] ? (
+        app.targets?.npm ? 'npm' :
+        app.targets?.script ? 'script' : null
+    ) : null;
 
-    // AUR gets its special Arch blue, everything else uses category color
     const hexColor = COLOR_MAP[color] || COLOR_MAP['gray'];
     const checkboxColor = isAur ? '#1793d1' : hexColor;
 
@@ -82,7 +81,7 @@ export const AppItem = memo(function AppItem({
             aria-checked={isSelected}
             aria-label={`${app.name}${!isAvailable ? ' (unavailable)' : ''}`}
             aria-disabled={!isAvailable}
-            className={`app-item group w-full flex items-center gap-2.5 py-1.5 px-2 outline-none transition-all duration-150
+            className={`app-item group w-full flex items-center gap-3 py-[7px] px-3 outline-none transition-all duration-150
         ${isFocused ? 'bg-[var(--bg-secondary)] border-l-2 shadow-sm' : 'border-l-2 border-transparent'}
         ${!isAvailable
                     ? 'opacity-40 grayscale-[30%]'
@@ -91,7 +90,7 @@ export const AppItem = memo(function AppItem({
             style={{
                 transition: 'background-color 0.15s, color 0.5s',
                 borderColor: isFocused ? hexColor : 'transparent',
-                backgroundColor: isFocused ? `color-mix(in srgb, ${hexColor}, transparent 85%)` : undefined, // Stronger tint on focus (15% opacity)
+                backgroundColor: isFocused ? `color-mix(in srgb, ${hexColor}, transparent 85%)` : undefined,
                 '--item-color': hexColor,
             } as React.CSSProperties}
             onClick={(e) => {
@@ -99,38 +98,34 @@ export const AppItem = memo(function AppItem({
                 onFocus?.();
                 if (isAvailable) {
                     onToggle();
-                    // Umami tracking disabled to save quota
-                    // if (isSelected) {
-                    //     analytics.appDeselected(app.name, app.category || '', selectedDistro);
-                    // } else {
-                    //     analytics.appSelected(app.name, app.category || '', selectedDistro);
-                    // }
                 }
             }}
         >
             <div
-                className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors duration-150 ${!isAvailable ? 'border-dashed' : ''}`}
+                className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors duration-150 ${!isAvailable ? 'border-dashed' : ''}`}
                 style={{
                     borderColor: isSelected || isAur ? checkboxColor : 'var(--border-secondary)',
                     backgroundColor: isSelected ? checkboxColor : 'transparent',
                 }}
             >
-                {isSelected && <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />}
+                {isSelected && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
             </div>
-            <AppIcon url={app.iconUrl} name={app.name} />
+            <AppIcon url={getIconUrl(app.icon)} name={app.name} />
             <div className="flex-1 flex items-baseline gap-1.5 min-w-0 overflow-hidden">
                 <span
                     className={`truncate cursor-help ${!isAvailable ? 'text-[var(--text-muted)]' : isSelected ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}
                     style={{
                         fontFamily: 'var(--font-open-sans), sans-serif',
-                        fontSize: '16px',
+                        fontSize: '20px',
+                        fontWeight: 500,
                         transition: 'color 0.5s',
                         textRendering: 'geometricPrecision',
                         WebkitFontSmoothing: 'antialiased'
                     }}
                     onMouseEnter={(e) => {
                         e.stopPropagation();
-                        onTooltipEnter(app.description, e);
+                        const tooltipText = app.note ? `${app.description} — ${app.note}` : app.description;
+                        onTooltipEnter(tooltipText, e);
                     }}
                     onMouseLeave={(e) => {
                         e.stopPropagation();
@@ -161,17 +156,32 @@ export const AppItem = memo(function AppItem({
                         <path d="M23 12l-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82 1.89 3.2 3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12m-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z" />
                     </svg>
                 )}
+                {universalTarget && (
+                    <span 
+                        className="ml-1.5 px-1.5 py-[1px] text-[10px] font-bold uppercase rounded-sm border opacity-80"
+                        style={{ color: hexColor, borderColor: hexColor }}
+                        onMouseEnter={(e) => {
+                            e.stopPropagation();
+                            onTooltipEnter(`Installed via ${universalTarget}. Requires correct runtime.`, e);
+                        }}
+                        onMouseLeave={(e) => {
+                            e.stopPropagation();
+                            onTooltipLeave();
+                        }}
+                    >
+                        {universalTarget}
+                    </span>
+                )}
             </div>
-            {/* Exclamation mark icon for unavailable apps */}
-            {!isAvailable && (
+            {(!isAvailable || universalTarget) && (
                 <div
                     className="relative group flex-shrink-0 cursor-help"
                     onMouseEnter={(e) => { e.stopPropagation(); onTooltipEnter(getUnavailableText(), e); }}
                     onMouseLeave={(e) => { e.stopPropagation(); onTooltipLeave(); }}
                 >
                     <svg
-                        className="w-4 h-4 text-[var(--text-muted)] transition-[color,transform] duration-300 hover:rotate-[360deg] hover:scale-110"
-                        style={{ color: isFocused ? hexColor : undefined }} // Use category color on hover/focus
+                        className={`w-[18px] h-[18px] transition-[color,transform] duration-300 hover:rotate-[360deg] hover:scale-110 ${universalTarget ? 'text-amber-600/40 hover:text-amber-500/60' : 'text-[var(--text-muted)]'}`}
+                        style={{ color: isFocused ? hexColor : undefined }}
                         viewBox="0 0 24 24"
                         fill="currentColor"
                         xmlns="http://www.w3.org/2000/svg"
@@ -181,5 +191,6 @@ export const AppItem = memo(function AppItem({
                 </div>
             )}
         </div>
+
     );
 });

@@ -1,0 +1,385 @@
+[
+  {
+    "id": "firefox",
+    "name": "Firefox",
+    "description": "Privacy-focused open-source browser by Mozilla",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "firefox",
+      "debian": "firefox-esr",
+      "arch": "firefox",
+      "fedora": "firefox",
+      "opensuse": "MozillaFirefox",
+      "nix": "firefox",
+      "flatpak": "org.mozilla.firefox",
+      "snap": "firefox",
+      "homebrew": "--cask firefox"
+    },
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "firefox",
+      "color": "#FF7139"
+    }
+  },
+  {
+    "id": "chromium",
+    "name": "Chromium",
+    "description": "Open-source browser that powers Google Chrome",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "chromium-browser",
+      "debian": "chromium",
+      "arch": "chromium",
+      "fedora": "chromium",
+      "opensuse": "chromium",
+      "nix": "chromium",
+      "flatpak": "org.chromium.Chromium",
+      "snap": "chromium",
+      "homebrew": "--cask chromium"
+    },
+    "icon": {
+      "type": "url",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Chromium_Logo.svg"
+    }
+  },
+  {
+    "id": "brave",
+    "name": "Brave",
+    "description": "Privacy browser with built-in ad/tracker blocker",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "brave-bin",
+      "opensuse": "brave-browser",
+      "nix": "brave",
+      "flatpak": "com.brave.Browser",
+      "snap": "brave",
+      "homebrew": "--cask brave-browser"
+    },
+    "unavailableReason": "Not in official repos. Use Flatpak/Snap or follow instructions at [brave.com/linux](https://brave.com/linux/).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "brave",
+      "color": "#FB542B"
+    }
+  },
+  {
+    "id": "librewolf",
+    "name": "LibreWolf",
+    "description": "Privacy-hardened Firefox fork with telemetry removed",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "librewolf-bin",
+      "nix": "librewolf",
+      "flatpak": "io.gitlab.librewolf-community",
+      "homebrew": "--cask librewolf"
+    },
+    "unavailableReason": "Not available in official repos. Use [Flatpak](https://flathub.org/en/apps/io.gitlab.librewolf-community) or follow instructions at [librewolf.net/installation](https://librewolf.net/installation/).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "firefoxbrowser",
+      "color": "#0588D1"
+    }
+  },
+  {
+    "id": "waterfox",
+    "name": "Waterfox",
+    "description": "Customizable Firefox fork with privacy features",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "waterfox-bin",
+      "flatpak": "net.waterfox.waterfox",
+      "homebrew": "--cask waterfox"
+    },
+    "unavailableReason": "Not available in official repos. Use [Flatpak](https://flathub.org/en/apps/net.waterfox.waterfox) or see [waterfox.com/download](https://www.waterfox.com/download/).",
+    "icon": {
+      "type": "url",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Waterfox_logo_2020_%28vectorized%29.svg"
+    }
+  },
+  {
+    "id": "tor",
+    "name": "Tor Browser",
+    "description": "Anonymous browsing via the Tor network",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "torbrowser-launcher",
+      "arch": "torbrowser-launcher",
+      "fedora": "torbrowser-launcher",
+      "opensuse": "torbrowser-launcher",
+      "nix": "tor-browser",
+      "flatpak": "org.torproject.torbrowser-launcher",
+      "homebrew": "--cask tor-browser"
+    },
+    "unavailableReason": "Debian requires editing /etc/apt/sources.list adding \"contrib\" to the end of the line that starts with \"deb\" or \"deb-src\" and `sudo apt update` before installing `sudo apt install -y torbrowser-launcher`. Or just download from [torproject.org](https://www.torproject.org/download/).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "torbrowser",
+      "color": "#7D4698"
+    }
+  },
+  {
+    "id": "chrome",
+    "name": "Google Chrome",
+    "description": "Most popular web browser by Google",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "google-chrome",
+      "nix": "google-chrome",
+      "flatpak": "com.google.Chrome",
+      "homebrew": "--cask google-chrome"
+    },
+    "unavailableReason": "Not in official repos for Debian/Ubuntu due to licensing. Install via [Flatpak](https://flathub.org/apps/com.google.Chrome), or download the .deb/.rpm directly from [google.com/chrome](https://www.google.com/chrome/).",
+    "icon": {
+      "type": "iconify",
+      "set": "logos",
+      "name": "chrome"
+    }
+  },
+  {
+    "id": "zen",
+    "name": "Zen Browser",
+    "description": "Privacy-focused Firefox fork",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "zen-browser-bin",
+      "flatpak": "app.zen_browser.zen",
+      "homebrew": "--cask zen"
+    },
+    "unavailableReason": "Not in most official repos. Use [Flatpak](https://flathub.org/apps/app.zen_browser.zen) or download from [zen-browser.app](https://zen-browser.app).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "zenbrowser",
+      "color": "#FF7139"
+    }
+  },
+  {
+    "id": "helium",
+    "name": "Helium",
+    "description": "Privacy-focused ungoogled-chromium browser",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "helium-browser-bin",
+      "homebrew": "--cask helium-browser"
+    },
+    "unavailableReason": "Only available as AppImage or via AUR. Download from [helium.computer](https://helium.computer/).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "googlechrome",
+      "color": "#00D4FF"
+    }
+  },
+  {
+    "id": "vivaldi",
+    "name": "Vivaldi",
+    "description": "Highly customizable browser for power users",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "vivaldi",
+      "nix": "vivaldi",
+      "flatpak": "com.vivaldi.Vivaldi",
+      "snap": "vivaldi",
+      "homebrew": "--cask vivaldi"
+    },
+    "unavailableReason": "Not in official repos. Use [Flatpak](https://flathub.org/apps/com.vivaldi.Vivaldi)/[Snap](https://snapcraft.io/vivaldi) or download from [vivaldi.com](https://vivaldi.com/download/).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "vivaldi",
+      "color": "#EF3939"
+    }
+  },
+  {
+    "id": "ungoogled-chromium",
+    "name": "Ungoogled Chromium",
+    "description": "Privacy-focused Chromium rebuild with Google services and telemetry removed.",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "ungoogled-chromium-bin",
+      "flatpak": "io.github.ungoogled_software.ungoogled_chromium",
+      "homebrew": "--cask ungoogled-chromium",
+      "nix": "ungoogled-chromium"
+    },
+    "unavailableReason": "Not in the official repos. Use the [Flatpak version](https://flathub.org/en/apps/io.github.ungoogled_software.ungoogled_chromium) or visit [ungoogled-software.github.io](https://ungoogled-software.github.io/) for official builds and installation instructions.",
+    "icon": {
+      "type": "url",
+      "url": "https://imgproxy.flathub.org/insecure/dpr:1/f:avif/q:100/rs:fit:128:128/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9pby9naXRodWIvdW5nb29nbGVkX3NvZnR3YXJlLnVuZ29vZ2xlZF9jaHJvbWl1bS9lZjYyMTVlYTliZWMxZDVjMjg0YzFlZDBkMDRkYTE4ZS9pY29ucy8xMjh4MTI4L2lvLmdpdGh1Yi51bmdvb2dsZWRfc29mdHdhcmUudW5nb29nbGVkX2Nocm9taXVtLnBuZw"
+    }
+  },
+  {
+    "id": "konqueror",
+    "name": "Konqueror",
+    "description": "An open source browser with integrated file manager by the KDE project",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "konqueror",
+      "debian": "konqueror",
+      "arch": "konqueror",
+      "fedora": "konqueror",
+      "opensuse": "konqueror",
+      "nix": "kdePackages.konqueror",
+      "snap": "konqueror"
+    },
+    "unavailableReason": "Please use your distribution's native package manager to install this application, or visit [kde.org](https://apps.kde.org/lt/konqueror/) for official installation instructions.",
+    "icon": {
+      "type": "url",
+      "url": "https://apps.kde.org/app-icons/org.kde.konqueror.svg"
+    }
+  },
+  {
+    "id": "falkon",
+    "name": "Falkon",
+    "description": "A lightweight browser by the KDE project",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "falkon",
+      "debian": "falkon",
+      "arch": "falkon",
+      "fedora": "falkon",
+      "opensuse": "falkon",
+      "nix": "kdePackages.falkon",
+      "flatpak": "org.kde.falkon",
+      "snap": "falkon"
+    },
+    "unavailableReason": "Please use your distribution's native package manager to install this application, or use the [Flatpak](https://flathub.org/en/apps/org.kde.falkon).",
+    "icon": {
+      "type": "url",
+      "url": "https://apps.kde.org/app-icons/org.kde.falkon.svg"
+    }
+  },
+  {
+    "id": "epiphany",
+    "name": "GNOME Web",
+    "description": "A lightweight browser by the GNOME project",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "epiphany-browser",
+      "debian": "epiphany-browser",
+      "arch": "epiphany",
+      "fedora": "epiphany",
+      "opensuse": "epiphany",
+      "nix": "epiphany",
+      "flatpak": "org.gnome.Epiphany",
+      "snap": "epiphany"
+    },
+    "unavailableReason": "Please use your distribution's native package manager to install this application, or use [Flatpak](https://flathub.org/en/apps/org.gnome.Epiphany).",
+    "icon": {
+      "type": "url",
+      "url": "https://static.gnome.org/catalog/app-icon/scalable/org.gnome.Epiphany.svg"
+    }
+  },
+  {
+    "id": "qutebrowser",
+    "name": "qutebrowser",
+    "description": "A lightweight keyboard-focused browser.",
+    "category": "Web Browsers",
+    "targets": {
+      "ubuntu": "qutebrowser",
+      "debian": "qutebrowser",
+      "arch": "qutebrowser",
+      "fedora": "qutebrowser",
+      "opensuse": "qutebrowser",
+      "nix": "qutebrowser"
+    },
+    "unavailableReason": "Not in the official repos. See [qutebrowser.org](https://qutebrowser.org/doc/install.html) for installation instructions",
+    "icon": {
+      "type": "url",
+      "url": "https://qutebrowser.org/icons/qutebrowser.svg"
+    }
+  },
+  {
+    "id": "nyxt",
+    "name": "Nyxt",
+    "description": "A keyboard-centric browser for power users.",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "nyxt",
+      "flatpak": "engineer.atlas.Nyxt",
+      "nix": "nyxt",
+      "opensuse": "nyxt"
+    },
+    "unavailableReason": "Not in most official repos. Use [Flatpak](https://flathub.org/en/apps/engineer.atlas.Nyxt) or see [nyxt-browser.com](https://nyxt-browser.com/download)",
+    "icon": {
+      "type": "url",
+      "url": "https://nyxt.atlas.engineer/image/nyxt_square_corner_128x128.png"
+    }
+  },
+  {
+    "id": "floorp",
+    "name": "Floorp",
+    "description": "A highly-customizable fork of Firefox.",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "floorp-bin",
+      "flatpak": "one.ablaze.floorp",
+      "homebrew": "--cask floorp",
+      "nix": "floorp"
+    },
+    "unavailableReason": "Not in most official repos. Use [Flatpak](https://flathub.org/en/apps/one.ablaze.floorp) or see [floorp.app](https://floorp.app/download) for installation instructions",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "floorp",
+      "color": "#4B42FF"
+    }
+  },
+  {
+    "id": "mullvad-browser",
+    "name": "Mullvad Browser",
+    "description": "Privacy-focused browser made in collaboration with the Tor Project.",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "mullvad-browser-bin",
+      "flatpak": "net.mullvad.MullvadBrowser",
+      "homebrew": "--cask mullvad-browser",
+      "nix": "mullvad-browser"
+    },
+    "unavailableReason": "Not in most official repos. Use [Flatpak](https://flathub.org/en/apps/net.mullvad.MullvadBrowser) or see [mullvad.net](https://mullvad.net/en/download/browser/linux).",
+    "icon": {
+      "type": "url",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Mullvad_Browser_logo.svg"
+    }
+  },
+  {
+    "id": "edge",
+    "name": "Microsoft Edge",
+    "description": "Proprietary web browser by Microsoft",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "microsoft-edge-stable-bin",
+      "nix": "microsoft-edge",
+      "homebrew": "--cask microsoft-edge",
+      "flatpak": "com.microsoft.Edge"
+    },
+    "unavailableReason": "Not in most official repos. Use [Flatpak](https://flathub.org/en/apps/com.microsoft.Edge) or download the .deb from [microsoft.com](https://www.microsoft.com/en-us/edge/)",
+    "icon": {
+      "type": "iconify",
+      "set": "logos",
+      "name": "microsoft-edge"
+    }
+  },
+  {
+    "id": "opera",
+    "name": "Opera",
+    "description": "Proprietary Chromium-based browser notoriously packed with features and bloat.",
+    "category": "Web Browsers",
+    "targets": {
+      "arch": "opera",
+      "homebrew": "--cask opera",
+      "flatpak": "com.opera.Opera",
+      "snap": "opera"
+    },
+    "unavailableReason": "Not in most official repos. Use [Flatpak](https://flathub.org/en/apps/com.opera.Opera) or download from [opera.com](https://www.opera.com/opera).",
+    "icon": {
+      "type": "iconify",
+      "set": "simple-icons",
+      "name": "opera",
+      "color": "#e2423d"
+    }
+  }
+]
